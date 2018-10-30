@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactFormGenerator, ElementStore } from 'react-form-builder2';
+import { ReactFormGenerator, ElementStore } from 'react-form-builder-advance';
 
 export default class Demobar extends React.Component {
 
