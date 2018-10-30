@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderBar from './header-bar';
 import Select from 'react-select';
 import SignaturePad from 'react-signature-canvas';
-import ReactBootstrapSlider from  'react-bootstrap-slider';
+import ReactBootstrapSlider from 'react-bootstrap-slider';
 import ReactDatePicker from 'react-datepicker';
 import StarRating from './star-rating';
 import xss from 'xss';
@@ -15,7 +15,7 @@ let myxss = new xss.FilterXSS({
     br: [],
     b: [],
     i: [],
-    ol:['style'],
+    ol: ['style'],
     ul: ['style'],
     li: [],
     p: ['style'],
@@ -40,15 +40,15 @@ class Header extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
-        <h3 className={classNames} dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.content) }} />
+        <h3 className={classNames} dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.content) }} />
       </div>
     );
   }
@@ -65,15 +65,15 @@ class Paragraph extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
-        <p className={classNames} dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.content) }} />
+        <p className={classNames} dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.content) }} />
       </div>
     );
   }
@@ -90,15 +90,15 @@ class Label extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
-        <label className={classNames} dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.content) }} />
+        <label className={classNames} dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.content) }} />
       </div>
     );
   }
@@ -112,9 +112,9 @@ class LineBreak extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -145,15 +145,15 @@ class TextInput extends React.Component {
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
-    if(this.props.read_only) {
+    if (this.props.read_only) {
       props.disabled = "disabled";
     }
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -161,9 +161,9 @@ class TextInput extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
 
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -191,7 +191,7 @@ class NumberInput extends React.Component {
       props.ref = this.inputField;
     }
 
-    if(this.props.read_only) {
+    if (this.props.read_only) {
       props.disabled = "disabled";
     }
 
@@ -200,9 +200,9 @@ class NumberInput extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -210,9 +210,9 @@ class NumberInput extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
 
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -234,7 +234,7 @@ class TextArea extends React.Component {
     props.className = "form-control";
     props.name = this.props.data.field_name;
 
-    if(this.props.read_only) {
+    if (this.props.read_only) {
       props.disabled = "disabled";
     }
 
@@ -248,9 +248,9 @@ class TextArea extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -258,8 +258,8 @@ class TextArea extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -276,13 +276,13 @@ class DatePicker extends React.Component {
     this.inputField = React.createRef();
     let value, internalValue;
 
-    if(props.data.defaultToday && (props.defaultValue === '' ||  props.defaultValue === undefined) ) {
+    if (props.data.defaultToday && (props.defaultValue === '' || props.defaultValue === undefined)) {
       value = moment().format('MM/DD/YYYY');
       internalValue = moment();
     } else {
       value = props.defaultValue;
 
-      if(props.defaultValue !== '' && props.defaultValue !== undefined) {
+      if (props.defaultValue !== '' && props.defaultValue !== undefined) {
         internalValue = moment(value, 'MM/DD/YYYY');
       }
     }
@@ -296,9 +296,9 @@ class DatePicker extends React.Component {
   }
 
   handleChange = (dt) => {
-    if(dt && dt.target) {
+    if (dt && dt.target) {
 
-      var placeholder = (dt && dt.target && dt.target.value === '') ? 'mm/dd/yyyy': '';
+      var placeholder = (dt && dt.target && dt.target.value === '') ? 'mm/dd/yyyy' : '';
       var formattedDate = (dt.target.value) ? moment(dt.target.value).format('YYYY-MM-DD') : '';
 
       this.setState({
@@ -318,10 +318,10 @@ class DatePicker extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if(this.props.data.defaultToday && !this.state.defaultToday) {
+    if (this.props.data.defaultToday && !this.state.defaultToday) {
       this.state.value = moment().format('MM/DD/YYYY');
       this.state.internalValue = moment(this.state.value);
-    } else if(!this.props.data.defaultToday && this.state.defaultToday) {
+    } else if (!this.props.data.defaultToday && this.state.defaultToday) {
       this.state.value = '';
       this.state.internalValue = undefined;
     }
@@ -342,7 +342,7 @@ class DatePicker extends React.Component {
       props.ref = this.inputField;
     }
 
-    if(this.props.read_only) {
+    if (this.props.read_only) {
       props.disabled = "disabled";
     }
 
@@ -351,9 +351,9 @@ class DatePicker extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -361,13 +361,13 @@ class DatePicker extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
           <div>
-            { this.props.data.readOnly &&
+            {this.props.data.readOnly &&
               <input type="text"
                 name={props.name}
                 ref={props.ref}
@@ -377,7 +377,7 @@ class DatePicker extends React.Component {
                 value={this.state.value}
                 className="form-control" />
             }
-            { iOS && !this.props.data.readOnly &&
+            {iOS && !this.props.data.readOnly &&
               <input type="date"
                 name={props.name}
                 ref={props.ref}
@@ -385,16 +385,16 @@ class DatePicker extends React.Component {
                 dateFormat="MM/DD/YYYY"
                 placeholder={this.state.placeholder}
                 value={this.state.value}
-                className = "form-control" />
+                className="form-control" />
             }
-            { !iOS && !this.props.data.readOnly &&
+            {!iOS && !this.props.data.readOnly &&
               <ReactDatePicker
                 name={props.name}
                 ref={props.ref}
                 onChange={this.handleChange}
                 selected={this.state.internalValue}
                 todayButton={'Today'}
-                className = "form-control"
+                className="form-control"
                 isClearable={true}
                 dateFormat="MM/DD/YYYY"
                 placeholderText='mm/dd/yyyy' />
@@ -422,7 +422,7 @@ class Dropdown extends React.Component {
       props.ref = this.inputField;
     }
 
-    if(this.props.read_only) {
+    if (this.props.read_only) {
       props.disabled = "disabled";
     }
 
@@ -431,9 +431,9 @@ class Dropdown extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -441,8 +441,8 @@ class Dropdown extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true  && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -498,9 +498,9 @@ class Signature extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -508,8 +508,8 @@ class Signature extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true  && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -530,14 +530,14 @@ class Tags extends React.Component {
     this.inputField = React.createRef();
   }
 
-  state = {value: this.props.defaultValue !== undefined ? this.props.defaultValue.split(",") : []};
+  state = { value: this.props.defaultValue !== undefined ? this.props.defaultValue.split(",") : [] };
 
   handleChange = (e) => {
-    this.setState({value: e});
+    this.setState({ value: e });
   };
 
   render() {
-    let options = this.props.data.options.map( option => {
+    let options = this.props.data.options.map(option => {
       option.label = option.text;
       return option;
     })
@@ -547,7 +547,7 @@ class Tags extends React.Component {
     props.onChange = this.handleChange;
 
     props.options = options;
-    if (!this.props.mutable) {props.value = options[0].text} // to show a sample of what tags looks like
+    if (!this.props.mutable) { props.value = options[0].text } // to show a sample of what tags looks like
     if (this.props.mutable) {
       props.value = this.state.value;
       props.ref = this.inputField;
@@ -558,9 +558,9 @@ class Tags extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -568,8 +568,8 @@ class Tags extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -596,9 +596,9 @@ class Checkboxes extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -606,8 +606,8 @@ class Checkboxes extends React.Component {
         }
         <div className="form-group">
           <label className="form-label">
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -623,11 +623,11 @@ class Checkboxes extends React.Component {
             }
             return (
               <label className={classNames} key={this_key}>
-                <input ref={c => { 
+                <input ref={c => {
                   if (c && self.props.mutable) {
-                    self.options[`child_ref_${option.key}`] = c; 
+                    self.options[`child_ref_${option.key}`] = c;
                   }
-                } } {...props} /> {option.text}
+                }} {...props} /> {option.text}
               </label>
             )
           })}
@@ -653,9 +653,9 @@ class RadioButtons extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -663,8 +663,8 @@ class RadioButtons extends React.Component {
         }
         <div className="form-group">
           <label className="form-label">
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -680,11 +680,11 @@ class RadioButtons extends React.Component {
             }
             return (
               <label className={classNames} key={this_key}>
-                <input ref={c => { 
+                <input ref={c => {
                   if (c && self.props.mutable) {
-                    self.options[`child_ref_${option.key}`] = c; 
-                  } 
-                } } {...props} /> {option.text}
+                    self.options[`child_ref_${option.key}`] = c;
+                  }
+                }} {...props} /> {option.text}
               </label>
             )
           })}
@@ -704,13 +704,13 @@ class Image extends React.Component {
 
     return (
       <div className={baseClasses} style={style}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} required={this.props.data.required} />
         }
-        { this.props.data.src &&
+        {this.props.data.src &&
           <img src={this.props.data.src} width={this.props.data.width} height={this.props.data.height} />
         }
-        { !this.props.data.src &&
+        {!this.props.data.src &&
           <div className="no-image">No Image</div>
         }
       </div>
@@ -740,9 +740,9 @@ class Rating extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -750,8 +750,8 @@ class Rating extends React.Component {
         }
         <div className="form-group">
           <label>
-            <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            <span dangerouslySetInnerHTML={{ __html: myxss.process(this.props.data.label) }} />
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -770,9 +770,9 @@ class HyperLink extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -794,9 +794,9 @@ class Download extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -812,20 +812,23 @@ class Download extends React.Component {
 
 class Camera extends React.Component {
 
-
-  state = {img: null};
+  constructor(props) {
+    super(props);
+    this.inputField = React.createRef();
+    this.state = { img: null };
+  }
 
   displayImage = (e) => {
     var self = this;
     var target = e.target;
     var file, reader;
 
-    if(target.files && target.files.length) {
+    if (target.files && target.files.length) {
       file = target.files[0];
       reader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onloadend = function() {
+      reader.onloadend = function () {
         self.setState({
           img: reader.result
         });
@@ -840,14 +843,26 @@ class Camera extends React.Component {
   };
 
   render() {
+    let props = {};
+    props.name = this.props.data.field_name;
+
+    if (this.props.read_only) {
+      props.disabled = "disabled";
+    }
+
+    if (this.props.mutable) {
+      props.defaultValue = this.state.img || this.props.defaultValue;
+      props.ref = this.inputField;
+    }
+
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -856,13 +871,13 @@ class Camera extends React.Component {
         <div className="form-group">
           <label>
             {this.props.data.label}
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true  && !this.props.read_only) &&
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
           <div className="image-upload-container">
 
-            { !this.state.img &&
+            {!this.state.img &&
               <div>
                 <input type="file" accept="image/*" capture="camera" className="image-upload" onChange={this.displayImage} />
                 <div className="image-upload-control">
@@ -872,9 +887,10 @@ class Camera extends React.Component {
               </div>
             }
 
-            { this.state.img &&
+            {this.state.img &&
               <div>
-                <img src={ this.state.img } height="100" className="image-upload-preview" /><br />
+                <img src={this.state.img} height="100" className="image-upload-preview" /><br />
+                <input type="hidden" {...props} />
                 <div className="btn btn-school btn-image-clear" onClick={this.clearImage}>
                   <i className="fa fa-times"></i> Clear Photo
                 </div>
@@ -892,6 +908,16 @@ class Range extends React.Component {
   constructor(props) {
     super(props);
     this.inputField = React.createRef();
+    this.state = {
+      value: props.defaultValue !== undefined ? parseInt(props.defaultValue, 10) : parseInt(props.data.default_value, 10) || 0,
+    };
+  }
+
+  changeValue = (e)=>{
+    const {target} = e;
+    this.setState({
+      value: target.value
+    });
   }
 
   render() {
@@ -902,33 +928,32 @@ class Range extends React.Component {
     props.min = this.props.data.min_value;
     props.max = this.props.data.max_value;
     props.step = this.props.data.step;
-
-    props.defaultValue = this.props.defaultValue !== undefined ? parseInt(this.props.defaultValue, 10) : parseInt(this.props.data.default_value, 10);
+    props.value = this.state.value;
 
     if (this.props.mutable) {
       props.ref = this.inputField;
     }
 
     let datalist = [];
-    for (var i=parseInt(this.props.data.min_value, 10); i <= parseInt(this.props.data.max_value, 10); i += parseInt(this.props.data.step, 10)) {
+    for (var i = parseInt(this.props.data.min_value, 10); i <= parseInt(this.props.data.max_value, 10); i += parseInt(this.props.data.step, 10)) {
       datalist.push(i);
     }
 
     let oneBig = 100 / (datalist.length - 1);
 
-    let _datalist = datalist.map((d,idx) => {
-      return <option key={props.list+'_'+idx}>{d}</option>
+    let _datalist = datalist.map((d, idx) => {
+      return <option key={props.list + '_' + idx}>{d}</option>
     })
 
-    let visible_marks = datalist.map((d,idx) => {
+    let visible_marks = datalist.map((d, idx) => {
       let option_props = {};
       let w = oneBig;
-      if (idx === 0 || idx === datalist.length-1)
-        w = oneBig/2;
-      option_props.key = props.list+'_label_'+idx;
-      option_props.style = {width: w + '%'};
-      if (idx === datalist.length-1)
-        option_props.style = {width: w + '%', textAlign: 'right'};
+      if (idx === 0 || idx === datalist.length - 1)
+        w = oneBig / 2;
+      option_props.key = props.list + '_label_' + idx;
+      option_props.style = { width: w + '%' };
+      if (idx === datalist.length - 1)
+        option_props.style = { width: w + '%', textAlign: 'right' };
       return <label {...option_props}>{d}</label>
     })
 
@@ -937,9 +962,9 @@ class Range extends React.Component {
 
     return (
       <div className={baseClasses}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <div>
-            { this.props.data.pageBreakBefore &&
+            {this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
             <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
@@ -948,7 +973,7 @@ class Range extends React.Component {
         <div className="form-group">
           <label>
             {this.props.data.label}
-            { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+            {(this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
             }
           </label>
@@ -959,14 +984,17 @@ class Range extends React.Component {
             </div>
             <ReactBootstrapSlider
               name={props.name}
-              value={props.defaultValue}
+              value={props.value}
               step={this.props.data.step}
               max={this.props.data.max_value}
-              min={this.props.data.min_value} />
+              min={this.props.data.min_value}
+              change={this.changeValue}
+              />
           </div>
           <div className="visible_marks">
             {visible_marks}
           </div>
+          <input readOnly name={props.name} value={this.state.value} type="hidden" />
           <datalist id={props.list}>
             {_datalist}
           </datalist>

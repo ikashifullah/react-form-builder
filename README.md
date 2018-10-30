@@ -1,8 +1,7 @@
-[![npm package](https://img.shields.io/badge/npm-0.0.3-orange.svg?style=flat-square)](https://www.npmjs.com/package/react-form-builder2)
-# React Form Builder 2
+# React Form Builder Advance
 A complete react form builder that interfaces with a json endpoint to load and save generated forms.
 - Upgraded to React 16.4.1
-- Use react-dnd for Drag & Drop 
+- Use react-dnd for Drag & Drop
 - Save form data with dummy api server.
 
 ![](screenshot.png)
@@ -14,7 +13,7 @@ A complete react form builder that interfaces with a json endpoint to load and s
 
 ```javascript
 var React = require('react');
-var FormBuilder = require('react-form-builder2');
+var FormBuilder = require('react-form-builder-advance');
 
 React.render(
   <FormBuilder.ReactFormBuilder />,
@@ -51,7 +50,7 @@ Now that a form is built and saved, let's generate it from the saved json.
 
 ```javascript
 var React = require('react');
-var FormBuilder = require('react-form-builder2');
+var FormBuilder = require('react-form-builder-advance');
 
 React.render(
   <FormBuilder.ReactFormGenerator
