@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import DemoBar from './demobar';
-import { ReactFormBuilder } from "react-form-builder-advance";
+import { ReactFormBuilder } from "react-form-builder-advanced";
 import * as variables from './variables'
 
 ReactDOM.render(

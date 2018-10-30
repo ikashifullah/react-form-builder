@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ReactFormBuilder } from "react-form-builder-advance";
+import { ReactFormBuilder } from "react-form-builder-advanced";
 import DemoBar from './demobar';
 import * as variables from './variables'
 import { get, post} from './requests';
