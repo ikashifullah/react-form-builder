@@ -5386,7 +5386,7 @@ react-bootstrap-slider@^2.1.5:
     bootstrap-slider "9.9.0"
     es6bindall "^0.0.9"
 
-react-datepicker@^1.2.2:
+react-datepicker@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-1.7.0.tgz#a5d8c689e8c7a3753d3e277589b03f097dcb3392"
   integrity sha512-2cRopX0/V05wMyhAG0JGw2vmYAxDTFJ+gkT8qZ3I1U9+SGrhccdpHF0WgMlcugOL7wT7zsWxMo4tpgHjJFQZ4A==
