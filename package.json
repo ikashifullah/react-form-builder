@@ -1,12 +1,12 @@
 {
-  "name": "react-form-builder2",
-  "version": "0.1.4",
+  "name": "react-form-builder-advanced",
+  "version": "0.1.5",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiho/react-form-builder.git"
+    "url": "git+https://github.com/kaushiknishchay/react-form-builder.git"
   },
   "files": [
     "lib",
@@ -21,7 +21,7 @@
     "drag",
     "drop"
   ],
-  "author": "Kiho Chang",
+  "author": "Nishchay Kaushik",
   "dependencies": {
     "beedle": "^0.6.8",
     "classnames": "^2.2.5",
