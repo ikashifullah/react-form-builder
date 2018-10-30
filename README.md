@@ -13,7 +13,7 @@ A complete react form builder that interfaces with a json endpoint to load and s
 
 ```javascript
 var React = require('react');
-var FormBuilder = require('react-form-builder-advance');
+var FormBuilder = require('react-form-builder-advanced');
 
 React.render(
   <FormBuilder.ReactFormBuilder />,
@@ -50,7 +50,7 @@ Now that a form is built and saved, let's generate it from the saved json.
 
 ```javascript
 var React = require('react');
-var FormBuilder = require('react-form-builder-advance');
+var FormBuilder = require('react-form-builder-advanced');
 
 React.render(
   <FormBuilder.ReactFormGenerator
