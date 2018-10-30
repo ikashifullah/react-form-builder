@@ -844,6 +844,7 @@ class Camera extends React.Component {
 
   render() {
     let props = {};
+    props.type = "hidden";
     props.name = this.props.data.field_name;
 
     if (this.props.read_only) {
@@ -913,8 +914,8 @@ class Range extends React.Component {
     };
   }
 
-  changeValue = (e)=>{
-    const {target} = e;
+  changeValue = (e) => {
+    const { target } = e;
     this.setState({
       value: target.value
     });
@@ -989,7 +990,7 @@ class Range extends React.Component {
               max={this.props.data.max_value}
               min={this.props.data.min_value}
               change={this.changeValue}
-              />
+            />
           </div>
           <div className="visible_marks">
             {visible_marks}

@@ -1,6 +1,6 @@
 {
   "name": "react-form-builder-advanced",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
   "license": "MIT",
@@ -70,6 +70,7 @@
     "webpack-dev-server": "^3.1.5"
   },
   "scripts": {
+    "publish": "npm run build:lib && npm publish",
     "build": "webpack -p --config webpack.production.config.js",
     "build:dev": "webpack --mode development",
     "build:style": "node-sass ./scss/application.scss dist/app.css --output-style compressed",
