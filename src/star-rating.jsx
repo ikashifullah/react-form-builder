@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
@@ -224,6 +224,7 @@ export default class StarRating extends React.Component {
     var starRating;
     if (this.state.editing) {
       starRating = (
+        <React.Fragment>
         <div ref={c => this.node = c}
           className="rating-container rating-gly-star"
           data-content={this.state.glyph}
@@ -231,15 +232,22 @@ export default class StarRating extends React.Component {
           onMouseLeave={this.handleMouseLeave.bind(this)}
           onClick={this.handleClick.bind(this)}>
           <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
-          <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>
+        <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly style={{
+          width: 65
+        }}/>
+        </React.Fragment>
       );
     } else {
       starRating = (
+      <React.Fragment>
         <div ref={c => this.node = c} className="rating-container rating-gly-star" data-content={this.state.glyph}>
           <div className="rating-stars" data-content={this.state.glyph} style={{width: this.state.pos}}></div>
-          <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly />
         </div>
+        <input type="number" name={this.props.name} value={this.state.ratingCache.rating} style={{display: 'none !important'}} min={this.min} max={this.max} readOnly  style={{
+          width: 65
+        }}/>
+      </React.Fragment>
       );
     }
 
