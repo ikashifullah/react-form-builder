@@ -908,6 +908,16 @@ class Range extends React.Component {
   constructor(props) {
     super(props);
     this.inputField = React.createRef();
+    this.state = {
+      value: props.defaultValue !== undefined ? parseInt(props.defaultValue, 10) : parseInt(props.data.default_value, 10) || 0,
+    };
+  }
+
+  changeValue = (e)=>{
+    const {target} = e;
+    this.setState({
+      value: target.value
+    });
   }
 
   render() {
@@ -918,8 +928,7 @@ class Range extends React.Component {
     props.min = this.props.data.min_value;
     props.max = this.props.data.max_value;
     props.step = this.props.data.step;
-
-    props.defaultValue = this.props.defaultValue !== undefined ? parseInt(this.props.defaultValue, 10) : parseInt(this.props.data.default_value, 10);
+    props.value = this.state.value;
 
     if (this.props.mutable) {
       props.ref = this.inputField;
@@ -975,14 +984,17 @@ class Range extends React.Component {
             </div>
             <ReactBootstrapSlider
               name={props.name}
-              value={props.defaultValue}
+              value={props.value}
               step={this.props.data.step}
               max={this.props.data.max_value}
-              min={this.props.data.min_value} />
+              min={this.props.data.min_value}
+              change={this.changeValue}
+              />
           </div>
           <div className="visible_marks">
             {visible_marks}
           </div>
+          <input readOnly name={props.name} value={this.state.value} type="hidden" />
           <datalist id={props.list}>
             {_datalist}
           </datalist>
