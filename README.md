@@ -20,6 +20,44 @@ React.render(
   document.body
 )
 ```
+# ReactFormBuilder Props
+
+- `toolbarItems: ?array`
+- `saveUrl: ?string`
+- `url: ?string`
+- `onLoad: ?function<Promise>`
+- `onPost: ?function` - single argument to function which is an array of objects containing name and value of each form field
+- `variables: ?object`
+
+
+## ReactFormBuilder Props Item Props
+
+- By default all the form builder items are deletable, to hide the delete icon for a particular item pass in the `allowDelete: false` property.
+
+-
+
+```json
+[
+      {
+        "id": "XXXXXXX",
+        "element": "Camera",
+        "text": "Camera",
+        "required": false,
+        "fieldName": "camera_XXXXXXX",
+        "label": "Placeholder Label",
+        "allowDelete": false
+      },
+      {
+        "id": "YYYYYYYY",
+        "element": "Camera",
+        "text": "Camera",
+        "required": false,
+        "fieldName": "camera_YYYYYYYY",
+        "label": "Placeholder Label"
+      },
+    ]
+
+```
 
 # Props
 
