@@ -34,7 +34,7 @@ React.render(
 
 - By default all the form builder items are deletable, to hide the delete icon for a particular item pass in the `allowDelete: false` property.
 
--
+- To disable the edit option for a field pass in the `allowEdit: false` property. By default edit will be enabled for all fields
 
 ```json
 [
@@ -45,7 +45,8 @@ React.render(
         "required": false,
         "fieldName": "camera_XXXXXXX",
         "label": "Placeholder Label",
-        "allowDelete": false
+        "allowDelete": false,
+        "allowEdit": false,
       },
       {
         "id": "YYYYYYYY",

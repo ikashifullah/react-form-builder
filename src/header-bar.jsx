@@ -12,6 +12,7 @@ export default class HeaderBar extends React.Component {
         <div className="toolbar-header-buttons">
           {
             this.props.data.element !== "LineBreak" &&
+            this.props.data.allowEdit !== false &&
             <div className="btn is-isolated btn-school" onClick={this.props.editModeOn.bind(this.props.parent, this.props.data)}><i className="is-isolated fa fa-pencil-square-o"></i></div>
           }
           {
