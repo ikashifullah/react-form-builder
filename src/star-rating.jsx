@@ -28,9 +28,8 @@ export default class StarRating extends React.Component {
         pos: 0,
         rating: 0
       },
-      editing: props.editing || true,
       stars: 5,
-      rating: 0,
+      rating: props.rating,
       pos: 0,
       glyph: this.getStars()
     };
@@ -53,8 +52,6 @@ export default class StarRating extends React.Component {
     this.min = 0;
     this.max = this.props.ratingAmount || 5;
     if (this.props.rating) {
-
-      this.state.editing = this.props.editing || false;
       var ratingVal = this.props.rating;
       this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
       this.state.ratingCache.rating = ratingVal;
@@ -212,7 +209,7 @@ export default class StarRating extends React.Component {
       'react-star-rating__root': true,
       'rating-disabled': this.props.disabled,
       ['react-star-rating__size--' + this.props.size]: this.props.size,
-      'rating-editing': this.state.editing
+      'rating-editing': this.props.editing
     });
 
     // is there a caption?
@@ -222,7 +219,7 @@ export default class StarRating extends React.Component {
 
     // are we editing this rating?
     var starRating;
-    if (this.state.editing) {
+    if (this.props.editing) {
       starRating = (
         <React.Fragment>
         <div ref={c => this.node = c}
@@ -274,6 +271,7 @@ StarRating.propTypes = {
 
 StarRating.defaultProps = {
   step: 0.5,
+  rating: 0,
   ratingAmount: 5,
   onRatingClick() {},
   disabled: false
