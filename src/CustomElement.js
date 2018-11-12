@@ -24,7 +24,6 @@ class CustomElement extends Component {
           required={this.props.data.required}
         />
         }
-        <br />
         <hr />
         <Element data={this.props.data} {...this.props.data.props} />
       </div>
