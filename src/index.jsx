@@ -20,7 +20,7 @@ class ReactFormBuilder extends React.Component {
       editMode: false,
       editElement: null
     }
-    document.addEventListener("click", this.editModeOff.bind(this));
+    // document.addEventListener("click", this.editModeOff.bind(this));
   }
 
   editModeOn(data, e) {
