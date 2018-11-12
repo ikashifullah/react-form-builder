@@ -11,6 +11,7 @@ class CustomElement extends Component {
   render() {
     let props = {};
     props.name = this.props.data.field_name;
+    props.answerData = this.props.answerData;
 
     if (this.props.mutable) {
       props.ref = this.inputField;

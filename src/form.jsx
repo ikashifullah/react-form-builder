@@ -245,10 +245,10 @@ export default class ReactForm extends React.Component {
     return (<Element mutable={true} key={`form_${item.id}`} data={item} />);
   }
 
-  getCustomElement(item) {
+  getCustomElement(item, answerData = {}) {
     return (<CustomElement
       ref={c => this.inputs[item.field_name] = c}
-      mutable={true} key={`form_${item.id}`} data={item} />);
+      mutable={true} key={`form_${item.id}`} data={item} answerData={answerData} />);
   }
 
   render() {
@@ -297,7 +297,7 @@ export default class ReactForm extends React.Component {
                            data={item} />
         default:
           if (item.custom) {
-            return this.getCustomElement(item);
+            return this.getCustomElement(item, this.props.answer_data[item.field_name]);
           } else {
             return this.getSimpleElement(item);
           }
