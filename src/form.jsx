@@ -23,9 +23,9 @@ export default class ReactForm extends React.Component {
 
   _checkboxesDefaultValue(item) {
     let defaultChecked = [];
-    item.options.forEach(option => {
-      defaultChecked.push(this.props.answer_data[`option_${option.key}`])
-    })
+    if(this.props.answer_data[item.field_name] != undefined) {
+      defaultChecked = this.props.answer_data[item.field_name]
+    }
     return defaultChecked;
   }
 

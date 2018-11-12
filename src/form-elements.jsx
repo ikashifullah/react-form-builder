@@ -619,9 +619,16 @@ class Checkboxes extends React.Component {
 
             props.type = "checkbox"
             props.value = option.value;
+
             if (self.props.mutable) {
               props.defaultChecked = self.props.defaultValue.indexOf(option.value) > -1 ? true : false;
             }
+         
+            if (this.props.read_only) {
+              props.disabled = "disabled";
+              props.defaultChecked = self.props.defaultValue.indexOf(option.key) > -1 ? true : false;
+            }
+
             return (
               <label className={classNames} key={this_key}>
                 <input ref={c => {
@@ -676,6 +683,11 @@ class RadioButtons extends React.Component {
 
             props.type = "radio"
             props.value = option.value;
+            if (this.props.read_only) {
+              props.disabled = "disabled";
+              props.defaultChecked = (self.props.defaultValue !== undefined && self.props.defaultValue.indexOf(option.key) > -1) ? true : false;
+            }
+
             if (self.props.mutable) {
               props.defaultChecked = (self.props.defaultValue !== undefined && self.props.defaultValue.indexOf(option.value) > -1) ? true : false;
             }
@@ -734,6 +746,13 @@ class Rating extends React.Component {
       props.rating = (this.props.defaultValue !== undefined && this.props.defaultValue.length) ? parseFloat(this.props.defaultValue, 10) : 0;
       props.editing = true;
       props.ref = this.inputField;
+    }
+
+    if (this.props.read_only) {
+      props.disabled = true;
+      props.editing = false;
+      props.rating = (this.props.defaultValue !== undefined) ? parseFloat(this.props.defaultValue, 10) : 0;
+      props.ref = this.inputField;      
     }
 
     let baseClasses = 'SortableItem rfb-item';
