@@ -8,6 +8,7 @@ import { EventEmitter } from 'fbemitter';
 import FormValidator from './form-validator';
 import * as FormElements from './form-elements';
 import { Camera, Checkboxes, Download, Image, Signature } from './form-elements';
+import CustomElement from '../CustomElement';
 
 
 export default class ReactForm extends React.Component {
@@ -117,30 +118,35 @@ export default class ReactForm extends React.Component {
     const itemData = { name: item.field_name }
     let $item = {};
     const ref = this.inputs[item.field_name];
-    if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
-      let checked_options = [];
-      item.options.forEach(option => {
-        let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
-        if ($option.checked) {
-          checked_options.push(option.key);
-        }
-      });
-      itemData.value = checked_options;
+    if (item.type === 'custom' || item.custom) {
+      if (!ref || (!ref.state || !ref.state.value)) return;
+      itemData.value = ref.state.value;
     } else {
-      if (!ref) return;
-      if (item.element === 'Rating') {
-        itemData.value = ref.inputField.current.state.rating;
+      if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
+        let checked_options = [];
+        item.options.forEach(option => {
+          let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
+          if ($option.checked) {
+            checked_options.push(option.key);
+          }
+        });
+        itemData.value = checked_options;
       } else {
-        if (item.element === 'Tags') {
-          itemData.value = ref.inputField.current.state.value || ref.state.value;
-        } else if (item.element === 'DatePicker') {
-          itemData.value = ref.inputField.current.state.value || ref.inputField.current.input.value || ref.state.value;
+        if (!ref) return;
+        if (item.element === 'Rating') {
+          itemData.value = ref.inputField.current.state.rating;
         } else {
-          $item = ReactDOM.findDOMNode(ref.inputField.current);
-          if ($item && $item.value !== undefined && $item.value !== null) {
-            itemData.value = $item.value.trim();
+          if (item.element === 'Tags') {
+            itemData.value = ref.inputField.current.state.value || ref.state.value;
+          } else if (item.element === 'DatePicker') {
+            itemData.value = ref.inputField.current.state.value || ref.inputField.current.input.value || ref.state.value;
           } else {
-            itemData.value = '';
+            $item = ReactDOM.findDOMNode(ref.inputField.current);
+            if ($item && $item.value !== undefined && $item.value !== null) {
+              itemData.value = $item.value.trim();
+            } else {
+              itemData.value = '';
+            }
           }
         }
       }
@@ -235,6 +241,12 @@ export default class ReactForm extends React.Component {
     return (<Element mutable={true} key={`form_${item.id}`} data={item} />);
   }
 
+  getCustomElement(item) {
+    return (<CustomElement
+      ref={c => this.inputs[item.field_name] = c}
+      mutable={true} key={`form_${item.id}`} data={item} />);
+  }
+
   render() {
     let data_items = this.props.data;
 
@@ -280,7 +292,11 @@ export default class ReactForm extends React.Component {
           return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`}
                            data={item} />
         default:
-          return this.getSimpleElement(item);
+          if (item.custom) {
+            return this.getCustomElement(item);
+          } else {
+            return this.getSimpleElement(item);
+          }
       }
     })
 

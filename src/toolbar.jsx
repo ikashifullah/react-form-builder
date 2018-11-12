@@ -1,11 +1,12 @@
 /**
-  * <Toolbar />
-  */
+ * <Toolbar />
+ */
 
 import React from 'react';
 import ToolbarItem from './toolbar-draggable-item';
 import ID from './UUID';
 import store from './stores/store.js';
+
 
 export default class Toolbar extends React.Component {
 
@@ -13,37 +14,38 @@ export default class Toolbar extends React.Component {
     super(props);
 
     const items = (this.props.items) ? this.props.items : this._defaultItems();
+    const { customItems = [] } = props;
     this.state = {
-      items: items
+      items: items.concat(customItems)
     };
     store.subscribe(state => this.setState({ store: state }));
   }
 
   static _defaultItemOptions(element) {
-    switch(element) {
-      case "Dropdown":
+    switch (element) {
+      case 'Dropdown':
         return [
-          {value: '', text: '', key: 'dropdown_option_' + ID.uuid()},
-          {value: '', text: '', key: 'dropdown_option_' + ID.uuid()},
-          {value: '', text: '', key: 'dropdown_option_' + ID.uuid()}
+          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
+          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
+          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() }
         ];
-      case "Tags":
+      case 'Tags':
         return [
-          {value: 'place_holder_tag_1', text: 'Place holder tag 1', key: 'tags_option_' + ID.uuid()},
-          {value: 'place_holder_tag_2', text: 'Place holder tag 2', key: 'tags_option_' + ID.uuid()},
-          {value: 'place_holder_tag_3', text: 'Place holder tag 3', key: 'tags_option_' + ID.uuid()}
+          { value: 'place_holder_tag_1', text: 'Place holder tag 1', key: 'tags_option_' + ID.uuid() },
+          { value: 'place_holder_tag_2', text: 'Place holder tag 2', key: 'tags_option_' + ID.uuid() },
+          { value: 'place_holder_tag_3', text: 'Place holder tag 3', key: 'tags_option_' + ID.uuid() }
         ];
-      case "Checkboxes":
+      case 'Checkboxes':
         return [
-          {value: 'place_holder_option_1', text: 'Place holder option 1', key: 'checkboxes_option_' + ID.uuid()},
-          {value: 'place_holder_option_2', text: 'Place holder option 2', key: 'checkboxes_option_' + ID.uuid()},
-          {value: 'place_holder_option_3', text: 'Place holder option 3', key: 'checkboxes_option_' + ID.uuid()}
+          { value: 'place_holder_option_1', text: 'Place holder option 1', key: 'checkboxes_option_' + ID.uuid() },
+          { value: 'place_holder_option_2', text: 'Place holder option 2', key: 'checkboxes_option_' + ID.uuid() },
+          { value: 'place_holder_option_3', text: 'Place holder option 3', key: 'checkboxes_option_' + ID.uuid() }
         ];
-      case "RadioButtons":
+      case 'RadioButtons':
         return [
-          {value: 'place_holder_option_1', text: 'Place holder option 1', key: 'radiobuttons_option_' + ID.uuid()},
-          {value: 'place_holder_option_2', text: 'Place holder option 2', key: 'radiobuttons_option_' + ID.uuid()},
-          {value: 'place_holder_option_3', text: 'Place holder option 3', key: 'radiobuttons_option_' + ID.uuid()}
+          { value: 'place_holder_option_1', text: 'Place holder option 1', key: 'radiobuttons_option_' + ID.uuid() },
+          { value: 'place_holder_option_2', text: 'Place holder option 2', key: 'radiobuttons_option_' + ID.uuid() },
+          { value: 'place_holder_option_3', text: 'Place holder option 3', key: 'radiobuttons_option_' + ID.uuid() }
         ];
       default:
         return [];
@@ -219,10 +221,17 @@ export default class Toolbar extends React.Component {
       element: item.key,
       text: item.name,
       static: item.static,
-      required: false
+      required: false,
     };
 
-    if(item.static) {
+    if (item.type === 'custom') {
+      elementOptions['custom'] = true;
+      elementOptions['allowEdit'] = false;
+      elementOptions['props'] = item.props;
+      elementOptions['component'] = item.component || null;
+    }
+
+    if (item.static) {
       elementOptions['bold'] = false;
       elementOptions['italic'] = false;
     }
@@ -242,16 +251,16 @@ export default class Toolbar extends React.Component {
     if (item.href)
       elementOptions['href'] = item.href;
 
-    if (item.key === "Image") {
+    if (item.key === 'Image') {
       elementOptions['src'] = item.src;
     }
 
-    if (item.key === "Download") {
+    if (item.key === 'Download') {
       elementOptions['_href'] = item._href;
       elementOptions['file_path'] = item.file_path;
     }
 
-    if (item.key === "Range") {
+    if (item.key === 'Range') {
       elementOptions['step'] = item.step;
       elementOptions['default_value'] = item.default_value;
       elementOptions['min_value'] = item.min_value;
@@ -288,7 +297,8 @@ export default class Toolbar extends React.Component {
         <ul>
           {
             this.state.items.map(item => {
-              return <ToolbarItem data={item} key={item.key} onClick={this._onClick.bind(this, item)} onCreate={this.create} />;
+              return <ToolbarItem data={item} key={item.key} onClick={this._onClick.bind(this, item)}
+                                  onCreate={this.create} />;
             })
           }
         </ul>
