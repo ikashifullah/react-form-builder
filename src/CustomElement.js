@@ -3,7 +3,23 @@ import HeaderBar from './header-bar';
 
 
 class CustomElement extends Component {
+  constructor(props) {
+    super(props);
+    this.inputField = React.createRef();
+  }
+
   render() {
+    let props = {};
+    props.name = this.props.data.field_name;
+
+    if (this.props.mutable) {
+      props.ref = this.inputField;
+    }
+
+    if (this.props.read_only) {
+      props.disabled = 'disabled';
+    }
+
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) {
       baseClasses += ' alwaysbreak';
@@ -25,7 +41,7 @@ class CustomElement extends Component {
         />
         }
         <hr />
-        <Element data={this.props.data} {...this.props.data.props} />
+        <Element data={this.props.data} {...this.props.data.props} {...props} />
       </div>
     );
   }

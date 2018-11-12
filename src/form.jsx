@@ -23,7 +23,7 @@ export default class ReactForm extends React.Component {
 
   _checkboxesDefaultValue(item) {
     let defaultChecked = [];
-    if(this.props.answer_data[item.field_name] != undefined) {
+    if (this.props.answer_data[item.field_name] != undefined) {
       defaultChecked = this.props.answer_data[item.field_name]
     }
     return defaultChecked;
@@ -119,8 +119,12 @@ export default class ReactForm extends React.Component {
     let $item = {};
     const ref = this.inputs[item.field_name];
     if (item.type === 'custom' || item.custom) {
-      if (!ref || (!ref.state || !ref.state.value)) return;
-      itemData.value = ref.state.value;
+      if (!ref) return;
+      if (ref.inputField && ref.inputField.current) {
+        itemData.value = ref.inputField.current.state.value;
+      } else {
+        return;
+      }
     } else {
       if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
         let checked_options = [];
