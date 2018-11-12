@@ -132,7 +132,7 @@ export default class ReactForm extends React.Component {
         itemData.value = ref.inputField.current.state.rating;
       } else {
         if (item.element === 'Tags') {
-          itemData.value = ref.inputField.current.state.value
+          itemData.value = ref.inputField.current.state.value || ref.state.value;
         } else if (item.element === 'DatePicker') {
           itemData.value = ref.inputField.current.state.value || ref.inputField.current.input.value || ref.state.value;
         } else {
