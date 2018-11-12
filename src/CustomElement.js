@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderBar from './src/header-bar';
+import HeaderBar from './header-bar';
 
 
 class CustomElement extends Component {

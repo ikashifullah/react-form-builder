@@ -4,7 +4,7 @@ import DemoBar from './demobar';
 import FormBuilder from './src/index';
 import * as variables from './variables'
 import { post } from './src/stores/requests';
-import CustomElement from './CustomElement';
+import CustomElement from './src/CustomElement';
 // Add our stylesheets for the demo.
 require('./scss/application.scss');
 

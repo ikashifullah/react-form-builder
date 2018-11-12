@@ -8,7 +8,7 @@ import { EventEmitter } from 'fbemitter';
 import FormValidator from './form-validator';
 import * as FormElements from './form-elements';
 import { Camera, Checkboxes, Download, Image, Signature } from './form-elements';
-import CustomElement from '../CustomElement';
+import CustomElement from './CustomElement';
 
 
 export default class ReactForm extends React.Component {

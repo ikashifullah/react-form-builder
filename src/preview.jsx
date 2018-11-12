@@ -8,7 +8,7 @@ import FormElementsEdit from './form-elements-edit';
 import * as SortableFormElements from './sortable-form-elements';
 import update from 'immutability-helper';
 import SortableElement from './sortable-element';
-import CustomElement from '../CustomElement';
+import CustomElement from './CustomElement';
 
 
 const { PlaceHolder } = SortableFormElements;
