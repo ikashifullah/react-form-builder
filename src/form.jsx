@@ -1,13 +1,14 @@
 /**
-  * <Form />
-  */
+ * <Form />
+ */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { EventEmitter } from 'fbemitter';
 import FormValidator from './form-validator';
-import { Image, Checkboxes, Signature, Download, Camera } from './form-elements';
 import * as FormElements from './form-elements';
+import { Camera, Checkboxes, Download, Image, Signature } from './form-elements';
+
 
 export default class ReactForm extends React.Component {
 
@@ -133,7 +134,7 @@ export default class ReactForm extends React.Component {
         if (item.element === 'Tags') {
           itemData.value = ref.inputField.current.state.value
         } else if (item.element === 'DatePicker') {
-          itemData.value = ref.inputField.current.state.value
+          itemData.value = ref.inputField.current.state.value || ref.inputField.current.input.value || ref.state.value;
         } else {
           $item = ReactDOM.findDOMNode(ref.inputField.current);
           if ($item && $item.value !== undefined && $item.value !== null) {
@@ -261,15 +262,23 @@ export default class ReactForm extends React.Component {
         case 'Range':
           return this.getInputElement(item);
         case 'Signature':
-          return <Signature ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this.props.answer_data[item.field_name]} />
+          return <Signature ref={c => this.inputs[item.field_name] = c}
+                            read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`}
+                            data={item} defaultValue={this.props.answer_data[item.field_name]} />
         case 'Checkboxes':
-          return <Checkboxes ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._checkboxesDefaultValue(item)} />
+          return <Checkboxes ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only}
+                             handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item}
+                             defaultValue={this._checkboxesDefaultValue(item)} />
         case 'Camera':
-          return <Camera ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this.props.answer_data[item.field_name]} />
+          return <Camera ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only}
+                         handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item}
+                         defaultValue={this.props.answer_data[item.field_name]} />
         case 'Image':
-          return <Image ref={c => this.inputs[item.field_name] = c} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this.props.answer_data[item.field_name]} />
+          return <Image ref={c => this.inputs[item.field_name] = c} handleChange={this.handleChange} mutable={true}
+                        key={`form_${item.id}`} data={item} defaultValue={this.props.answer_data[item.field_name]} />
         case 'Download':
-          return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`} data={item} />
+          return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`}
+                           data={item} />
         default:
           return this.getSimpleElement(item);
       }
@@ -286,21 +295,22 @@ export default class ReactForm extends React.Component {
       <div>
         <FormValidator emitter={this.emitter} />
         <div className='react-form-builder-form'>
-          <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
+          <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action}
+                onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
             {this.props.authenticity_token &&
-              <div style={formTokenStyle}>
-                <input name='utf8' type='hidden' value='&#x2713;' />
-                <input name='authenticity_token' type='hidden' value={this.props.authenticity_token} />
-                <input name='task_id' type='hidden' value={this.props.task_id} />
-              </div>
+            <div style={formTokenStyle}>
+              <input name='utf8' type='hidden' value='&#x2713;' />
+              <input name='authenticity_token' type='hidden' value={this.props.authenticity_token} />
+              <input name='task_id' type='hidden' value={this.props.task_id} />
+            </div>
             }
             {items}
             <div className='btn-toolbar'>
               {!this.props.hide_actions &&
-                <input type='submit' className='btn btn-school btn-big btn-agree' value={actionName} />
+              <input type='submit' className='btn btn-school btn-big btn-agree' value={actionName} />
               }
               {!this.props.hide_actions && this.props.back_action &&
-                <a href={this.props.back_action} className='btn btn-default btn-cancel btn-big'>{backName}</a>
+              <a href={this.props.back_action} className='btn btn-default btn-cancel btn-big'>{backName}</a>
               }
             </div>
           </form>
