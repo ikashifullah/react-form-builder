@@ -226,7 +226,6 @@ export default class Toolbar extends React.Component {
 
     if (item.type === 'custom') {
       elementOptions['custom'] = true;
-      elementOptions['allowEdit'] = false;
       elementOptions['props'] = item.props;
       elementOptions['component'] = item.component || null;
     }

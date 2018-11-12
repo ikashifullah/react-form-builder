@@ -59,7 +59,7 @@ ReactDOM.render(
         icon: 'fa fa-cog',
         static: true,
         props: { test: 'asdas' },
-        content: 'Placeholder Text...'
+        label: 'Placeholder Text...'
       },
     ]}
 
