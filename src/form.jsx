@@ -83,6 +83,8 @@ export default class ReactForm extends React.Component {
     if (item.required === true) {
       const ref = this.inputs[item.field_name];
       if (item.type === 'custom' || item.custom) {
+        $item = {};
+
         if (!ref) return;
         if (ref.inputField && ref.inputField.current) {
           $item.value = ref.inputField.current.state.value;
