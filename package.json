@@ -1,5 +1,5 @@
 {
-  "name": "react-form-builder-advanced",
+  "name": "cb-react-form-builder",
   "version": "0.1.24",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
