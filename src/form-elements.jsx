@@ -370,7 +370,7 @@ class DatePicker extends React.Component {
             {this.props.data.readOnly &&
               <input type="text"
                 name={props.name}
-                ref={props.ref}
+                ref={this.inputField}
                 readOnly="true"
                 dateFormat="MM/DD/YYYY"
                 placeholder={this.state.placeholder}
@@ -380,7 +380,7 @@ class DatePicker extends React.Component {
             {iOS && !this.props.data.readOnly &&
               <input type="date"
                 name={props.name}
-                ref={props.ref}
+                ref={this.inputField}
                 onChange={this.handleChange}
                 dateFormat="MM/DD/YYYY"
                 placeholder={this.state.placeholder}
@@ -390,14 +390,15 @@ class DatePicker extends React.Component {
             {!iOS && !this.props.data.readOnly &&
               <ReactDatePicker
                 name={props.name}
-                ref={props.ref}
+                ref={this.inputField}
                 onChange={this.handleChange}
                 selected={this.state.internalValue}
                 todayButton={'Today'}
                 className="form-control"
                 isClearable={true}
                 dateFormat="MM/DD/YYYY"
-                placeholderText='mm/dd/yyyy' />
+                placeholderText='mm/dd/yyyy'
+                dropdownMode={'scroll'} />
             }
           </div>
         </div>
