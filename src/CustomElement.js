@@ -29,22 +29,25 @@ class CustomElement extends Component {
 
     return (
       <div className={baseClasses}>
-        {!this.props.mutable && (
-          <HeaderBar
-            parent={this.props.parent}
-            editModeOn={this.props.editModeOn}
-            data={this.props.data}
-            onDestroy={this.props._onDestroy}
-            onEdit={this.props.onEdit}
-            static={this.props.data.static}
-            required={this.props.data.required}
-          />
-        )}
-        <label>
-          <span dangerouslySetInnerHTML={{ __html: this.props.data.label }} />
-        </label>
-        <hr />
-        <Element data={this.props.data} {...this.props.data.props} {...props} />
+        {!this.props.mutable &&
+        <HeaderBar
+          parent={this.props.parent}
+          editModeOn={this.props.editModeOn}
+          data={this.props.data}
+          onDestroy={this.props._onDestroy}
+          onEdit={this.props.onEdit}
+          static={this.props.data.static}
+          required={this.props.data.required}
+        />
+        }
+        <div className='form-group'>
+          <label>
+            <span dangerouslySetInnerHTML={ {__html: this.props.data.label}}></span>
+            { this.props.data.required && <span class="label-required label label-danger">Required</span>}
+          </label>
+          <hr />
+          <Element data={this.props.data} {...this.props.data.props} {...props} />
+        </div>
       </div>
     );
   }
