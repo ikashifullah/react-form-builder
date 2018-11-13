@@ -42,7 +42,7 @@ class CustomElement extends Component {
         />
         }
         <label>
-          <span dangerouslySetInnerHTML={ {__html: data.label}}></span>
+          <span dangerouslySetInnerHTML={ {__html: this.props.data.label}}></span>
         </label>
         <hr />
         <Element data={this.props.data} {...this.props.data.props} {...props} />
