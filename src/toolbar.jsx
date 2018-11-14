@@ -7,16 +7,14 @@ import ToolbarItem from './toolbar-draggable-item';
 import ID from './UUID';
 import store from './stores/store.js';
 
-
 export default class Toolbar extends React.Component {
-
   constructor(props) {
     super(props);
 
-    const items = (this.props.items) ? this.props.items : this._defaultItems();
+    const items = this.props.items ? this.props.items : this._defaultItems();
     const { customItems = [] } = props;
     this.state = {
-      items: items.concat(customItems)
+      items: items.concat(customItems),
     };
     store.subscribe(state => this.setState({ store: state }));
   }
@@ -27,25 +25,61 @@ export default class Toolbar extends React.Component {
         return [
           { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
           { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
-          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() }
+          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
         ];
       case 'Tags':
         return [
-          { value: 'place_holder_tag_1', text: 'Place holder tag 1', key: 'tags_option_' + ID.uuid() },
-          { value: 'place_holder_tag_2', text: 'Place holder tag 2', key: 'tags_option_' + ID.uuid() },
-          { value: 'place_holder_tag_3', text: 'Place holder tag 3', key: 'tags_option_' + ID.uuid() }
+          {
+            value: 'place_holder_tag_1',
+            text: 'Place holder tag 1',
+            key: 'tags_option_' + ID.uuid(),
+          },
+          {
+            value: 'place_holder_tag_2',
+            text: 'Place holder tag 2',
+            key: 'tags_option_' + ID.uuid(),
+          },
+          {
+            value: 'place_holder_tag_3',
+            text: 'Place holder tag 3',
+            key: 'tags_option_' + ID.uuid(),
+          },
         ];
       case 'Checkboxes':
         return [
-          { value: 'place_holder_option_1', text: 'Place holder option 1', key: 'checkboxes_option_' + ID.uuid() },
-          { value: 'place_holder_option_2', text: 'Place holder option 2', key: 'checkboxes_option_' + ID.uuid() },
-          { value: 'place_holder_option_3', text: 'Place holder option 3', key: 'checkboxes_option_' + ID.uuid() }
+          {
+            value: 'place_holder_option_1',
+            text: 'Place holder option 1',
+            key: 'checkboxes_option_' + ID.uuid(),
+          },
+          {
+            value: 'place_holder_option_2',
+            text: 'Place holder option 2',
+            key: 'checkboxes_option_' + ID.uuid(),
+          },
+          {
+            value: 'place_holder_option_3',
+            text: 'Place holder option 3',
+            key: 'checkboxes_option_' + ID.uuid(),
+          },
         ];
       case 'RadioButtons':
         return [
-          { value: 'place_holder_option_1', text: 'Place holder option 1', key: 'radiobuttons_option_' + ID.uuid() },
-          { value: 'place_holder_option_2', text: 'Place holder option 2', key: 'radiobuttons_option_' + ID.uuid() },
-          { value: 'place_holder_option_3', text: 'Place holder option 3', key: 'radiobuttons_option_' + ID.uuid() }
+          {
+            value: 'place_holder_option_1',
+            text: 'Place holder option 1',
+            key: 'radiobuttons_option_' + ID.uuid(),
+          },
+          {
+            value: 'place_holder_option_2',
+            text: 'Place holder option 2',
+            key: 'radiobuttons_option_' + ID.uuid(),
+          },
+          {
+            value: 'place_holder_option_3',
+            text: 'Place holder option 3',
+            key: 'radiobuttons_option_' + ID.uuid(),
+          },
         ];
       default:
         return [];
@@ -59,27 +93,27 @@ export default class Toolbar extends React.Component {
         name: 'Header Text',
         icon: 'fa fa-header',
         static: true,
-        content: 'Placeholder Text...'
+        content: 'Placeholder Text...',
       },
       {
         key: 'Label',
         name: 'Label',
         static: true,
         icon: 'fa fa-font',
-        content: 'Placeholder Text...'
+        content: 'Placeholder Text...',
       },
       {
         key: 'Paragraph',
         name: 'Paragraph',
         static: true,
         icon: 'fa fa-paragraph',
-        content: 'Placeholder Text...'
+        content: 'Placeholder Text...',
       },
       {
         key: 'LineBreak',
         name: 'Line Break',
         static: true,
-        icon: 'fa fa-arrows-h'
+        icon: 'fa fa-arrows-h',
       },
       {
         key: 'Dropdown',
@@ -88,7 +122,7 @@ export default class Toolbar extends React.Component {
         icon: 'fa fa-caret-square-o-down',
         label: 'Placeholder Label',
         field_name: 'dropdown_',
-        options: []
+        options: [],
       },
       {
         key: 'Tags',
@@ -97,7 +131,7 @@ export default class Toolbar extends React.Component {
         icon: 'fa fa-tags',
         label: 'Placeholder Label',
         field_name: 'tags_',
-        options: []
+        options: [],
       },
       {
         key: 'Checkboxes',
@@ -106,7 +140,7 @@ export default class Toolbar extends React.Component {
         icon: 'fa fa-check-square-o',
         label: 'Placeholder Label',
         field_name: 'checkboxes_',
-        options: []
+        options: [],
       },
       {
         key: 'RadioButtons',
@@ -115,7 +149,7 @@ export default class Toolbar extends React.Component {
         icon: 'fa fa-dot-circle-o',
         label: 'Placeholder Label',
         field_name: 'radio_buttons_',
-        options: []
+        options: [],
       },
       {
         key: 'TextInput',
@@ -123,7 +157,7 @@ export default class Toolbar extends React.Component {
         name: 'Text Input',
         label: 'Placeholder Label',
         icon: 'fa fa-font',
-        field_name: 'text_input_'
+        field_name: 'text_input_',
       },
       {
         key: 'NumberInput',
@@ -131,7 +165,7 @@ export default class Toolbar extends React.Component {
         name: 'Number Input',
         label: 'Placeholder Label',
         icon: 'fa fa-plus',
-        field_name: 'number_input_'
+        field_name: 'number_input_',
       },
       {
         key: 'TextArea',
@@ -139,7 +173,7 @@ export default class Toolbar extends React.Component {
         name: 'Multi-line Input',
         label: 'Placeholder Label',
         icon: 'fa fa-text-height',
-        field_name: 'text_area_'
+        field_name: 'text_area_',
       },
       {
         key: 'Image',
@@ -147,7 +181,7 @@ export default class Toolbar extends React.Component {
         label: '',
         icon: 'fa fa-photo',
         field_name: 'image_',
-        src: ''
+        src: '',
       },
       {
         key: 'Rating',
@@ -155,7 +189,7 @@ export default class Toolbar extends React.Component {
         name: 'Rating',
         label: 'Placeholder Label',
         icon: 'fa fa-star',
-        field_name: 'rating_'
+        field_name: 'rating_',
       },
       {
         key: 'DatePicker',
@@ -164,7 +198,7 @@ export default class Toolbar extends React.Component {
         name: 'Date',
         icon: 'fa fa-calendar',
         label: 'Placeholder Label',
-        field_name: 'date_picker_'
+        field_name: 'date_picker_',
       },
       {
         key: 'Signature',
@@ -172,7 +206,7 @@ export default class Toolbar extends React.Component {
         name: 'Signature',
         icon: 'fa fa-pencil-square-o',
         label: 'Signature',
-        field_name: 'signature_'
+        field_name: 'signature_',
       },
       {
         key: 'HyperLink',
@@ -180,7 +214,7 @@ export default class Toolbar extends React.Component {
         icon: 'fa fa-link',
         static: true,
         content: 'Placeholder Web site link ...',
-        href: 'http://www.example.com'
+        href: 'http://www.example.com',
       },
       {
         key: 'Download',
@@ -190,7 +224,7 @@ export default class Toolbar extends React.Component {
         content: 'Placeholder file name ...',
         field_name: 'download_',
         file_path: '',
-        _href: ''
+        _href: '',
       },
       {
         key: 'Range',
@@ -203,16 +237,16 @@ export default class Toolbar extends React.Component {
         min_value: 1,
         max_value: 5,
         min_label: 'Easy',
-        max_label: 'Difficult'
+        max_label: 'Difficult',
       },
       {
         key: 'Camera',
         name: 'Camera',
         icon: 'fa fa-camera',
         label: 'Placeholder Label',
-        field_name: 'camera_'
-      }
-    ]
+        field_name: 'camera_',
+      },
+    ];
   }
 
   create(item) {
@@ -238,17 +272,13 @@ export default class Toolbar extends React.Component {
     if (item.canHaveAnswer)
       elementOptions['canHaveAnswer'] = item.canHaveAnswer;
 
-    if (item.canReadOnly)
-      elementOptions['readOnly'] = false;
+    if (item.canReadOnly) elementOptions['readOnly'] = false;
 
-    if (item.canDefaultToday)
-      elementOptions['defaultToday'] = false;
+    if (item.canDefaultToday) elementOptions['defaultToday'] = false;
 
-    if (item.content)
-      elementOptions['content'] = item.content;
+    if (item.content) elementOptions['content'] = item.content;
 
-    if (item.href)
-      elementOptions['href'] = item.href;
+    if (item.href) elementOptions['href'] = item.href;
 
     if (item.key === 'Image') {
       elementOptions['src'] = item.src;
@@ -268,17 +298,17 @@ export default class Toolbar extends React.Component {
       elementOptions['max_label'] = item.max_label;
     }
 
-    if (item.defaultValue)
-      elementOptions['defaultValue'] = item.defaultValue;
+    if (item.defaultValue) elementOptions['defaultValue'] = item.defaultValue;
 
     if (item.field_name)
       elementOptions['field_name'] = item.field_name + ID.uuid();
 
-    if (item.label)
-      elementOptions['label'] = item.label;
+    if (item.label) elementOptions['label'] = item.label;
 
     if (item.options) {
-      elementOptions['options'] = Toolbar._defaultItemOptions(elementOptions['element']);
+      elementOptions['options'] = Toolbar._defaultItemOptions(
+        elementOptions['element'],
+      );
     }
 
     return elementOptions;
@@ -294,14 +324,18 @@ export default class Toolbar extends React.Component {
       <div className="react-form-builder-toolbar pull-right">
         <h4>Toolbox</h4>
         <ul>
-          {
-            this.state.items.map(item => {
-              return <ToolbarItem data={item} key={item.key} onClick={this._onClick.bind(this, item)}
-                                  onCreate={this.create} />;
-            })
-          }
+          {this.state.items.map(item => {
+            return (
+              <ToolbarItem
+                data={item}
+                key={item.key}
+                onClick={this._onClick.bind(this, item)}
+                onCreate={this.create}
+              />
+            );
+          })}
         </ul>
       </div>
-    )
+    );
   }
 }

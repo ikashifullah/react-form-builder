@@ -10,11 +10,9 @@ import update from 'immutability-helper';
 import SortableElement from './sortable-element';
 import CustomElement from './CustomElement';
 
-
 const { PlaceHolder } = SortableFormElements;
 
 export default class Preview extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -23,11 +21,15 @@ export default class Preview extends React.Component {
 
     this.state = {
       data: [],
-      answer_data: {}
-    }
+      answer_data: {},
+    };
 
-    var loadData = (this.props.url) ? this.props.url : (this.props.data) ? this.props.data : [];
-    var saveUrl = (this.props.saveUrl) ? this.props.saveUrl : '';
+    var loadData = this.props.url
+      ? this.props.url
+      : this.props.data
+        ? this.props.data
+        : [];
+    var saveUrl = this.props.saveUrl ? this.props.saveUrl : '';
 
     store.dispatch('load', { loadData, saveUrl });
     const update = this._onChange.bind(this);
@@ -38,7 +40,7 @@ export default class Preview extends React.Component {
   }
 
   _setValue(text) {
-    return text.replace(/[^A-Z0-9]+/ig, '_').toLowerCase();
+    return text.replace(/[^A-Z0-9]+/gi, '_').toLowerCase();
   }
 
   updateElement(element) {
@@ -61,7 +63,7 @@ export default class Preview extends React.Component {
   _onChange(data) {
     let answer_data = {};
 
-    data.forEach((item) => {
+    data.forEach(item => {
       if (item && item.readOnly && this.props.variables[item.variableKey]) {
         answer_data[item.field_name] = this.props.variables[item.variableKey];
       }
@@ -69,7 +71,7 @@ export default class Preview extends React.Component {
 
     this.setState({
       data,
-      answer_data
+      answer_data,
     });
   }
 
@@ -78,15 +80,15 @@ export default class Preview extends React.Component {
   }
 
   insertCard(item, hoverIndex) {
-    const { data } = this.state
-    data.splice(hoverIndex, 0, item)
-    this.saveData(item, hoverIndex, hoverIndex)
+    const { data } = this.state;
+    data.splice(hoverIndex, 0, item);
+    this.saveData(item, hoverIndex, hoverIndex);
   }
 
   moveCard(dragIndex, hoverIndex) {
-    const { data } = this.state
-    const dragCard = data[dragIndex]
-    this.saveData(dragCard, dragIndex, hoverIndex)
+    const { data } = this.state;
+    const dragCard = data[dragIndex];
+    this.saveData(dragCard, dragIndex, hoverIndex);
   }
 
   cardPlaceHolder(dragIndex, hoverIndex) {
@@ -99,7 +101,7 @@ export default class Preview extends React.Component {
         $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
       },
     });
-    this.setState(newData)
+    this.setState(newData);
     store.dispatch('updateOrder', newData.data);
   }
 
@@ -141,21 +143,31 @@ export default class Preview extends React.Component {
     const data = this.state.data.filter(x => !!x);
     const items = data.map((item, index) => {
       return this.getElement(item, index);
-    })
+    });
     return (
       <div className={classes}>
         <div className="edit-form">
-          {this.props.editElement !== null &&
-          <FormElementsEdit showCorrectColumn={this.props.showCorrectColumn} files={this.props.files}
-                            manualEditModeOff={this.props.manualEditModeOff} preview={this}
-                            element={this.props.editElement} updateElement={this.updateElement} />
-          }
+          {this.props.editElement !== null && (
+            <FormElementsEdit
+              showCorrectColumn={this.props.showCorrectColumn}
+              files={this.props.files}
+              manualEditModeOff={this.props.manualEditModeOff}
+              preview={this}
+              element={this.props.editElement}
+              updateElement={this.updateElement}
+            />
+          )}
         </div>
         <div className="Sortable">{items}</div>
-        <PlaceHolder id="form-place-holder" show={items.length == 0} index={items.length}
-                     moveCard={this.cardPlaceHolder} insertCard={this.insertCard} />
+        <PlaceHolder
+          id="form-place-holder"
+          show={items.length == 0}
+          index={items.length}
+          moveCard={this.cardPlaceHolder}
+          insertCard={this.insertCard}
+        />
       </div>
-    )
+    );
   }
 }
 Preview.defaultProps = {
@@ -163,5 +175,5 @@ Preview.defaultProps = {
   files: [],
   editMode: false,
   editElement: null,
-  className: 'react-form-builder-preview pull-left'
-}
+  className: 'react-form-builder-preview pull-left',
+};

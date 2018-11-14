@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import HeaderBar from './header-bar';
 
-
 class CustomElement extends Component {
   constructor(props) {
     super(props);
@@ -41,11 +40,14 @@ class CustomElement extends Component {
           required={this.props.data.required}
         />
         }
-        <label>
-          <span dangerouslySetInnerHTML={ {__html: data.label}}></span>
-        </label>
-        <hr />
-        <Element data={this.props.data} {...this.props.data.props} {...props} />
+        <div className='form-group'>
+          <label>
+            <span dangerouslySetInnerHTML={ {__html: this.props.data.label}}></span>
+            { this.props.data.required && <span class="label-required label label-danger">Required</span>}
+          </label>
+          <hr />
+          <Element data={this.props.data} {...this.props.data.props} {...props} />
+        </div>
       </div>
     );
   }
