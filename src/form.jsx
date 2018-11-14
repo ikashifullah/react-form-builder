@@ -33,7 +33,16 @@ export default class ReactForm extends React.Component {
     let incorrect = false;
     if (item.canHaveAnswer) {
       const ref = this.inputs[item.field_name];
-      if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
+      if (item.type === 'custom' || item.custom) {
+        if (!ref) return;
+        if (ref.inputField && ref.inputField.current) {
+          // TODO:
+          //  Add logic to validate custom components.
+          return;
+        } else {
+          return;
+        }
+      } else if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
         item.options.forEach(option => {
           let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
           if ((option.hasOwnProperty('correct') && !$option.checked) || (!option.hasOwnProperty('correct') && $option.checked)) {
@@ -73,7 +82,22 @@ export default class ReactForm extends React.Component {
     let invalid = false;
     if (item.required === true) {
       const ref = this.inputs[item.field_name];
-      if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
+      if (item.type === 'custom' || item.custom) {
+        if (!ref) return;
+        if (ref.inputField && ref.inputField.current) {
+          let  $item = {};
+          $item.value = ref.inputField.current.state.value;
+          if ($item.value) {
+            if(Array.isArray($item.value) && $item.value.length == 0){
+              invalid = true;
+            } else if (Object.keys([]).length === 0 && [].constructor === Object) {
+              invalid = true;
+            }
+          }
+        } else {
+          return;
+        }
+      } else if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
         let checked_options = 0;
         item.options.forEach(option => {
           let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
@@ -297,7 +321,7 @@ export default class ReactForm extends React.Component {
                            data={item} />
         default:
           if (item.custom) {
-            return this.getCustomElement(item, this.props.answer_data[item.field_name]);
+            return this.getCustomElement(item, this.props.answer_data);
           } else {
             return this.getSimpleElement(item);
           }

@@ -14,7 +14,7 @@
   ],
   "author": "Kiho Chang",
   "devDependencies": {
-    "react-form-builder-advanced": "^0.1.5",
+    "cb-react-form-builder": "^0.1.5",
     "live-server": "^1.2.0"
   },
   "scripts": {

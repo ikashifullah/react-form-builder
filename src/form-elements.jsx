@@ -342,10 +342,6 @@ class DatePicker extends React.Component {
       props.ref = this.inputField;
     }
 
-    if (this.props.read_only) {
-      props.disabled = "disabled";
-    }
-
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
@@ -385,7 +381,9 @@ class DatePicker extends React.Component {
                 dateFormat="MM/DD/YYYY"
                 placeholder={this.state.placeholder}
                 value={this.state.value}
-                className="form-control" />
+                className="form-control"
+                readOnly={this.props.read_only}
+              />
             }
             {!iOS && !this.props.data.readOnly &&
               <ReactDatePicker
@@ -398,7 +396,9 @@ class DatePicker extends React.Component {
                 isClearable={true}
                 dateFormat="MM/DD/YYYY"
                 placeholderText='mm/dd/yyyy'
-                dropdownMode={'scroll'} />
+                dropdownMode={'scroll'}
+                readOnly={this.props.read_only}
+              />
             }
           </div>
         </div>
@@ -683,13 +683,14 @@ class RadioButtons extends React.Component {
 
             props.type = "radio"
             props.value = option.value;
-            if (this.props.read_only) {
-              props.disabled = "disabled";
-              props.defaultChecked = (self.props.defaultValue !== undefined && self.props.defaultValue.indexOf(option.key) > -1) ? true : false;
-            }
 
             if (self.props.mutable) {
               props.defaultChecked = (self.props.defaultValue !== undefined && self.props.defaultValue.indexOf(option.value) > -1) ? true : false;
+            }
+
+            if (this.props.read_only) {
+              props.disabled = "disabled";
+              props.defaultChecked = (self.props.defaultValue !== undefined && self.props.defaultValue.indexOf(option.key) > -1) ? true : false;
             }
             return (
               <label className={classNames} key={this_key}>

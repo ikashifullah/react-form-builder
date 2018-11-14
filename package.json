@@ -1,12 +1,12 @@
 {
-  "name": "react-form-builder-advanced",
-  "version": "0.1.24",
+  "name": "cb-react-form-builder",
+  "version": "0.1.30",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaushiknishchay/react-form-builder.git"
+    "url": "git+https://github.com/codebrahma/react-form-builder.git"
   },
   "files": [
     "lib",
@@ -21,7 +21,7 @@
     "drag",
     "drop"
   ],
-  "author": "Nishchay Kaushik",
+  "author": "Codebrahma",
   "dependencies": {
     "beedle": "^0.6.8",
     "classnames": "^2.2.5",

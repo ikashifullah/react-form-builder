@@ -5028,9 +5028,9 @@ react-draft-wysiwyg@^1.12.13:
     linkify-it "^2.0.3"
     prop-types "^15.6.0"
 
-react-form-builder-advanced@^0.1.5:
+cb-react-form-builder@^0.1.5:
   version "0.1.5"
-  resolved "https://registry.yarnpkg.com/react-form-builder-advanced/-/react-form-builder-advanced-0.1.5.tgz#1a0e1791fd5fb74db9dcb7aa3a6c8a27b247dc26"
+  resolved "https://registry.yarnpkg.com/cb-react-form-builder/-/cb-react-form-builder-0.1.5.tgz#1a0e1791fd5fb74db9dcb7aa3a6c8a27b247dc26"
   integrity sha512-/6T2GkrEngrVltMSls/ruWi/0ZPrJaClbRJtrTHTtlIynr9xjUkZOMwSzyQRBg2jhqmiocr27N9E4ty1wT/WxQ==
   dependencies:
     beedle "^0.6.8"
