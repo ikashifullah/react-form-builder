@@ -6,12 +6,12 @@ import TextAreaAutosize from 'react-textarea-autosize';
 export default class extends React.Component {
   // mixins: [SortableItemMixin],
   static defaultProps = {
-    className: 'rfb-item'
+    className: 'rfb-item',
   };
 
   state = {
     changedValue: this.props.data.value,
-    data: this.props.data
+    data: this.props.data,
   };
 
   render() {
@@ -19,10 +19,15 @@ export default class extends React.Component {
 
     return (
       <div>
-        <HeaderBar name={this.props.data.text} onDestroy={this.props.onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+        <HeaderBar
+          name={this.props.data.text}
+          onDestroy={this.props.onDestroy}
+          onEdit={this.props.onEdit}
+          static={this.props.data.static}
+          required={this.props.data.required}
+        />
         {this.props.children}
       </div>
-    )
-
+    );
   }
 }
