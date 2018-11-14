@@ -304,21 +304,18 @@ export default class ReactForm extends React.Component {
         case 'Signature':
           return <Signature ref={c => this.inputs[item.field_name] = c}
                             read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`}
-                            data={item} defaultValue={this.props.answer_data[item.field_name]} />
+                            data={item} defaultValue={this.props.answer_data[item.field_name]} />;
         case 'Checkboxes':
           return <Checkboxes ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only}
                              handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item}
-                             defaultValue={this._checkboxesDefaultValue(item)} />
+                             defaultValue={this._checkboxesDefaultValue(item)} />;
         case 'Camera':
           return <Camera ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only}
                          handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item}
-                         defaultValue={this.props.answer_data[item.field_name]} />
-        case 'Image':
-          return <Image ref={c => this.inputs[item.field_name] = c} handleChange={this.handleChange} mutable={true}
-                        key={`form_${item.id}`} data={item} defaultValue={this.props.answer_data[item.field_name]} />
+                         defaultValue={this.props.answer_data[item.field_name]} />;
         case 'Download':
           return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`}
-                           data={item} />
+                           data={item} />;
         default:
           if (item.custom) {
             return this.getCustomElement(item, this.props.answer_data);
@@ -326,11 +323,11 @@ export default class ReactForm extends React.Component {
             return this.getSimpleElement(item);
           }
       }
-    })
+    });
 
     let formTokenStyle = {
       display: 'none'
-    }
+    };
 
     let actionName = (this.props.action_name) ? this.props.action_name : 'Submit';
     let backName = (this.props.back_name) ? this.props.back_name : 'Cancel';

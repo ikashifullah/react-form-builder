@@ -393,10 +393,11 @@ class DatePicker extends React.Component {
                 selected={this.state.internalValue}
                 todayButton={'Today'}
                 className="form-control"
-                isClearable={true}
+                isClearable={!this.props.read_only}
                 dateFormat="MM/DD/YYYY"
                 placeholderText='mm/dd/yyyy'
                 dropdownMode={'scroll'}
+                disabled={this.props.read_only}
                 readOnly={this.props.read_only}
               />
             }
@@ -541,7 +542,8 @@ class Tags extends React.Component {
     let options = this.props.data.options.map(option => {
       option.label = option.text;
       return option;
-    })
+    });
+
     let props = {};
     props.multi = true;
     props.name = this.props.data.field_name;
@@ -552,6 +554,10 @@ class Tags extends React.Component {
     if (this.props.mutable) {
       props.value = this.state.value;
       props.ref = this.inputField;
+    }
+
+    if (this.props.read_only) {
+      props.disabled = "disabled";
     }
 
     let baseClasses = 'SortableItem rfb-item';
@@ -617,13 +623,13 @@ class Checkboxes extends React.Component {
             let props = {};
             props.name = 'option_' + option.key;
 
-            props.type = "checkbox"
+            props.type = "checkbox";
             props.value = option.value;
 
             if (self.props.mutable) {
               props.defaultChecked = self.props.defaultValue.indexOf(option.value) > -1 ? true : false;
             }
-         
+
             if (this.props.read_only) {
               props.disabled = "disabled";
               props.defaultChecked = self.props.defaultValue.indexOf(option.key) > -1 ? true : false;
@@ -753,7 +759,7 @@ class Rating extends React.Component {
       props.disabled = true;
       props.editing = false;
       props.rating = (this.props.defaultValue !== undefined) ? parseFloat(this.props.defaultValue, 10) : 0;
-      props.ref = this.inputField;      
+      props.ref = this.inputField;
     }
 
     let baseClasses = 'SortableItem rfb-item';
