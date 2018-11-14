@@ -310,6 +310,17 @@ export default class ReactForm extends React.Component {
     );
   }
 
+
+  componentWillUnmount() {
+    try {
+      if (this.customErrorSubscription) {
+        this.customErrorSubscription.remove();
+      }
+    } catch (e) {
+
+    }
+  }
+
   render() {
     let data_items = this.props.data;
 
@@ -401,8 +412,8 @@ export default class ReactForm extends React.Component {
     let actionName = this.props.action_name ? this.props.action_name : 'Submit';
     let backName = this.props.back_name ? this.props.back_name : 'Cancel';
 
-    if (this.props.onErrors) {
-      this.emitter.addListener('formValidation', this.props.onErrors)
+    if (this.props.onErrors && typeof this.props.onErrors === 'function') {
+      this.customErrorSubscription = this.emitter.addListener('formValidation', this.props.onErrors)
     }
 
     return (
