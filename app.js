@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import DemoBar from './demobar';
 import FormBuilder from './src/index';
-import * as variables from './variables'
+import * as variables from './variables';
 import { post } from './src/stores/requests';
 import CustomElement from './src/CustomElement';
 // Add our stylesheets for the demo.
@@ -11,9 +11,9 @@ require('./scss/application.scss');
 const url = '/api/formdata';
 const saveUrl = '/api/formdata';
 
-const TestComponent = (props) => (<h1>sad</h1>);
+const TestComponent = props => <h1>sad</h1>;
 
-const onLoad = function () {
+const onLoad = function() {
   console.log('onLoad');
   return new Promise((resolve, reject) => {
     return resolve([
@@ -36,12 +36,12 @@ const onLoad = function () {
       // },
     ]);
   });
-}
+};
 
-const onPost = function (data) {
+const onPost = function(data) {
   console.log('onPost', data);
   post(saveUrl, data);
-}
+};
 
 ReactDOM.render(
   <FormBuilder.ReactFormBuilder
@@ -59,12 +59,11 @@ ReactDOM.render(
         icon: 'fa fa-cog',
         static: true,
         props: { test: 'asdas' },
-        label: 'Placeholder Text...'
+        label: 'Placeholder Text...',
       },
     ]}
-
   />,
-  document.getElementById('form-builder')
+  document.getElementById('form-builder'),
 );
 
 // ReactDOM.render(
@@ -77,5 +76,5 @@ ReactDOM.render(
 
 ReactDOM.render(
   <DemoBar variables={variables} />,
-  document.getElementById('demo-bar')
-)
+  document.getElementById('demo-bar'),
+);
