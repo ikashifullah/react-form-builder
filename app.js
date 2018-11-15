@@ -13,7 +13,7 @@ const saveUrl = '/api/formdata';
 
 const TestComponent = props => <h1>sad</h1>;
 
-const onLoad = function() {
+const onLoad = function () {
   console.log('onLoad');
   return new Promise((resolve, reject) => {
     return resolve([
@@ -38,7 +38,7 @@ const onLoad = function() {
   });
 };
 
-const onPost = function(data) {
+const onPost = function (data) {
   console.log('onPost', data);
   post(saveUrl, data);
 };
@@ -59,6 +59,25 @@ ReactDOM.render(
         icon: 'fa fa-cog',
         static: true,
         props: { test: 'asdas' },
+        custom_options: [{
+          type: 'select',
+          // multi: true,
+          label: 'Allowed MIME Type',
+          name: 'mimeType',
+          options: [{
+            label: 'image/*',
+            value: 'Image'
+          }, {
+            label: 'video/*',
+            value: 'Video'
+          }],
+          defaultValue: ''
+        }, {
+          type: 'checkbox',
+          label: 'Make a Checkbox',
+          defaultValue: true,
+          name: 'namedCheckbox'
+        }],
         label: 'Placeholder Text...',
       },
     ]}
