@@ -197,7 +197,7 @@ export default class FormElementsEdit extends React.Component {
               onBlur={this.updateElement.bind(this)}
               onChange={this.editElementProp.bind(this, 'file_path', 'value')}
             >
-              {this_files.map(function(file) {
+              {this_files.map(function (file) {
                 let this_key = 'file_' + file.id;
                 return (
                   <option value={file.id} key={this_key}>
@@ -347,49 +347,49 @@ export default class FormElementsEdit extends React.Component {
             )}
             {(this.state.element.element === 'RadioButtons' ||
               this.state.element.element === 'Checkboxes') && (
-              <div className="checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={this_checked_inline}
-                    value={true}
-                    onChange={this.editElementProp.bind(
-                      this,
-                      'inline',
-                      'checked',
-                    )}
-                  />
-                  Display horizonal
+                <div className="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={this_checked_inline}
+                      value={true}
+                      onChange={this.editElementProp.bind(
+                        this,
+                        'inline',
+                        'checked',
+                      )}
+                    />
+                    Display horizonal
                 </label>
-              </div>
-            )}
+                </div>
+              )}
           </div>
         )}
 
         {this.state.element.element === 'Signature' &&
-        this.props.element.readOnly ? (
-          <div className="form-group">
-            <label className="control-label" htmlFor="variableKey">
-              Variable Key:
+          this.props.element.readOnly ? (
+            <div className="form-group">
+              <label className="control-label" htmlFor="variableKey">
+                Variable Key:
             </label>
-            <input
-              id="variableKey"
-              type="text"
-              className="form-control"
-              defaultValue={this.props.element.variableKey}
-              onBlur={this.updateElement.bind(this)}
-              onChange={this.editElementProp.bind(this, 'variableKey', 'value')}
-            />
-            <p className="help-block">
-              This will give the element a key that can be used to replace the
-              content with a runtime value.
+              <input
+                id="variableKey"
+                type="text"
+                className="form-control"
+                defaultValue={this.props.element.variableKey}
+                onBlur={this.updateElement.bind(this)}
+                onChange={this.editElementProp.bind(this, 'variableKey', 'value')}
+              />
+              <p className="help-block">
+                This will give the element a key that can be used to replace the
+                content with a runtime value.
             </p>
-          </div>
-        ) : (
-          <div />
-        )}
+            </div>
+          ) : (
+            <div />
+          )}
 
-        {this.props.element.custom_options.map(c_option => {
+        {(this.props.element.custom_options || []).map(c_option => {
           if (c_option.type === 'input') {
             return (
               <div className="form-group" key={c_option.name}>
