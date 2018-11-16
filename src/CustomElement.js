@@ -41,7 +41,7 @@ class CustomElement extends Component {
           />
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span dangerouslySetInnerHTML={{ __html: this.props.data.label }} />
             {this.props.data.required && (
               <span className="label-required label label-danger">
