@@ -7,6 +7,7 @@ import ToolbarItem from './toolbar-draggable-item';
 import ID from './UUID';
 import store from './stores/store.js';
 
+
 export default class Toolbar extends React.Component {
   constructor(props) {
     super(props);
@@ -23,9 +24,21 @@ export default class Toolbar extends React.Component {
     switch (element) {
       case 'Dropdown':
         return [
-          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
-          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
-          { value: '', text: '', key: 'dropdown_option_' + ID.uuid() },
+          {
+            value: '',
+            text: '',
+            key: 'dropdown_option_' + ID.uuid()
+          },
+          {
+            value: '',
+            text: '',
+            key: 'dropdown_option_' + ID.uuid()
+          },
+          {
+            value: '',
+            text: '',
+            key: 'dropdown_option_' + ID.uuid()
+          },
         ];
       case 'Tags':
         return [
@@ -263,6 +276,7 @@ export default class Toolbar extends React.Component {
       elementOptions['custom'] = true;
       elementOptions['props'] = item.props;
       elementOptions['component'] = item.component || null;
+      elementOptions['custom_options'] = item.custom_options || [];
     }
 
     if (item.static) {
@@ -270,8 +284,9 @@ export default class Toolbar extends React.Component {
       elementOptions['italic'] = false;
     }
 
-    if (item.canHaveAnswer)
+    if (item.canHaveAnswer) {
       elementOptions['canHaveAnswer'] = item.canHaveAnswer;
+    }
 
     if (item.canReadOnly) elementOptions['readOnly'] = false;
 
@@ -301,8 +316,9 @@ export default class Toolbar extends React.Component {
 
     if (item.defaultValue) elementOptions['defaultValue'] = item.defaultValue;
 
-    if (item.field_name)
+    if (item.field_name) {
       elementOptions['field_name'] = item.field_name + ID.uuid();
+    }
 
     if (item.label) elementOptions['label'] = item.label;
 
