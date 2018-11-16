@@ -1,12 +1,13 @@
 import React from 'react';
 import DynamicOptionList from './dynamic-option-list';
 import TextAreaAutosize from 'react-textarea-autosize';
+import Select from 'react-select';
 
 import {
   ContentState,
-  EditorState,
   convertFromHTML,
   convertToRaw,
+  EditorState,
 } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
@@ -29,9 +30,11 @@ export default class FormElementsEdit extends React.Component {
       dirty: false,
     };
   }
+
   toggleRequired() {
     let this_element = this.state.element;
   }
+
   editElementProp(elemProperty, targProperty, e) {
     // elemProperty could be content or label
     // targProperty could be value or checked
@@ -47,6 +50,28 @@ export default class FormElementsEdit extends React.Component {
         if (targProperty === 'checked') {
           this.updateElement();
         }
+      },
+    );
+  }
+
+  editSelectProp(elemProperty, values) {
+    // elemProperty could be content or label
+    // targProperty could be value or checked
+    let this_element = this.state.element;
+    if (values === undefined || values === null || values === '') {
+      this_element[elemProperty] = '';
+    } else {
+      this_element[elemProperty] = Array.isArray(values)
+        ? values.map(v => v.value)
+        : values.value;
+    }
+    this.setState(
+      {
+        element: this_element,
+        dirty: true,
+      },
+      () => {
+        this.updateElement();
       },
     );
   }
@@ -120,8 +145,12 @@ export default class FormElementsEdit extends React.Component {
     if (
       this_files.length < 1 ||
       (this_files.length > 0 && this_files[0].id !== '')
-    )
-      this_files.unshift({ id: '', file_name: '' });
+    ) {
+      this_files.unshift({
+        id: '',
+        file_name: '',
+      });
+    }
 
     let editorState;
     if (this.props.element.hasOwnProperty('content')) {
@@ -168,7 +197,7 @@ export default class FormElementsEdit extends React.Component {
               onBlur={this.updateElement.bind(this)}
               onChange={this.editElementProp.bind(this, 'file_path', 'value')}
             >
-              {this_files.map(function(file) {
+              {this_files.map(function (file) {
                 let this_key = 'file_' + file.id;
                 return (
                   <option value={file.id} key={this_key}>
@@ -318,47 +347,136 @@ export default class FormElementsEdit extends React.Component {
             )}
             {(this.state.element.element === 'RadioButtons' ||
               this.state.element.element === 'Checkboxes') && (
-              <div className="checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={this_checked_inline}
-                    value={true}
-                    onChange={this.editElementProp.bind(
-                      this,
-                      'inline',
-                      'checked',
-                    )}
-                  />
-                  Display horizonal
+                <div className="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={this_checked_inline}
+                      value={true}
+                      onChange={this.editElementProp.bind(
+                        this,
+                        'inline',
+                        'checked',
+                      )}
+                    />
+                    Display horizonal
                 </label>
-              </div>
-            )}
+                </div>
+              )}
           </div>
         )}
 
         {this.state.element.element === 'Signature' &&
-        this.props.element.readOnly ? (
-          <div className="form-group">
-            <label className="control-label" htmlFor="variableKey">
-              Variable Key:
+          this.props.element.readOnly ? (
+            <div className="form-group">
+              <label className="control-label" htmlFor="variableKey">
+                Variable Key:
             </label>
-            <input
-              id="variableKey"
-              type="text"
-              className="form-control"
-              defaultValue={this.props.element.variableKey}
-              onBlur={this.updateElement.bind(this)}
-              onChange={this.editElementProp.bind(this, 'variableKey', 'value')}
-            />
-            <p className="help-block">
-              This will give the element a key that can be used to replace the
-              content with a runtime value.
+              <input
+                id="variableKey"
+                type="text"
+                className="form-control"
+                defaultValue={this.props.element.variableKey}
+                onBlur={this.updateElement.bind(this)}
+                onChange={this.editElementProp.bind(this, 'variableKey', 'value')}
+              />
+              <p className="help-block">
+                This will give the element a key that can be used to replace the
+                content with a runtime value.
             </p>
-          </div>
-        ) : (
-          <div />
-        )}
+            </div>
+          ) : (
+            <div />
+          )}
+
+        {(this.props.element.custom_options || []).map(c_option => {
+          if (c_option.type === 'input') {
+            return (
+              <div className="form-group" key={c_option.name}>
+                <label className="control-label" htmlFor={c_option.name}>
+                  {c_option.label}
+                </label>
+                <input
+                  id={c_option.name}
+                  type="text"
+                  className="form-control"
+                  defaultValue={
+                    this.props.element[c_option.name] || c_option.defaultValue
+                  }
+                  onBlur={this.updateElement.bind(this)}
+                  onChange={this.editElementProp.bind(
+                    this,
+                    c_option.name,
+                    'value',
+                  )}
+                />
+              </div>
+            );
+          } else if(c_option.type === 'textarea') {
+            return (
+              <div className="form-group" key={c_option.name}>
+                <label className="control-label" htmlFor={c_option.name}>
+                  {c_option.label}
+                </label>
+                <textarea
+                  id={c_option.name}
+                  className="form-control"
+                  defaultValue={
+                    this.props.element[c_option.name] || c_option.defaultValue
+                  }
+                  onBlur={this.updateElement.bind(this)}
+                  onChange={this.editElementProp.bind(
+                    this,
+                    c_option.name,
+                    'value',
+                  )}
+                />
+              </div>
+            );
+          } else if (c_option.type === 'select') {
+            return (
+              <div className="form-group" key={c_option.name}>
+                <label className="control-label">{c_option.label}</label>
+                <Select
+                  multi={c_option.multi || false}
+                  id={c_option.name}
+                  options={c_option.options}
+                  value={
+                    this.props.element[c_option.name] ||
+                    c_option.defaultValue ||
+                    ''
+                  }
+                  onBlur={this.updateElement.bind(this)}
+                  onChange={this.editSelectProp.bind(this, c_option.name)}
+                />
+              </div>
+            );
+          } else if (c_option.type === 'checkbox') {
+            return (
+              <div className="form-group" key={c_option.name}>
+                <div className="checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={
+                        this.props.element[c_option.name] ||
+                        c_option.defaultvalue ||
+                        false
+                      }
+                      value={true}
+                      onChange={this.editElementProp.bind(
+                        this,
+                        c_option.name,
+                        'checked',
+                      )}
+                    />
+                    {c_option.label}
+                  </label>
+                </div>
+              </div>
+            );
+          }
+        })}
 
         <div className="form-group">
           <label className="control-label">Print Options</label>

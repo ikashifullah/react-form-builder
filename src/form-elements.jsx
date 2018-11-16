@@ -236,7 +236,7 @@ class TextInput extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -303,7 +303,7 @@ class NumberInput extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -369,7 +369,7 @@ class TextArea extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -489,7 +489,7 @@ class DatePicker extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -598,7 +598,7 @@ class Dropdown extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -695,7 +695,7 @@ class Signature extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -790,7 +790,7 @@ class Tags extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -1086,7 +1086,7 @@ class Rating extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -1248,7 +1248,7 @@ class Camera extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             {this.props.data.label}
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
@@ -1384,7 +1384,7 @@ class Range extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             {this.props.data.label}
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
