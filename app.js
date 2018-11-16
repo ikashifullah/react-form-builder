@@ -77,6 +77,12 @@ ReactDOM.render(
           label: 'Make a Checkbox',
           defaultValue: true,
           name: 'namedCheckbox'
+        },
+          {
+          type: 'textarea',
+          label: 'This is a textarea',
+          defaultValue: '',
+          name: 'textarea'
         }],
         label: 'Placeholder Text...',
       },

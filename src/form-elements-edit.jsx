@@ -412,6 +412,27 @@ export default class FormElementsEdit extends React.Component {
                 />
               </div>
             );
+          } else if(c_option.type === 'textarea') {
+            return (
+              <div className="form-group" key={c_option.name}>
+                <label className="control-label" htmlFor={c_option.name}>
+                  {c_option.label}
+                </label>
+                <textarea
+                  id={c_option.name}
+                  className="form-control"
+                  defaultValue={
+                    this.props.element[c_option.name] || c_option.defaultValue
+                  }
+                  onBlur={this.updateElement.bind(this)}
+                  onChange={this.editElementProp.bind(
+                    this,
+                    c_option.name,
+                    'value',
+                  )}
+                />
+              </div>
+            );
           } else if (c_option.type === 'select') {
             return (
               <div className="form-group" key={c_option.name}>
