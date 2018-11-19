@@ -269,7 +269,6 @@ export default class Toolbar extends React.Component {
       text: item.name,
       static: item.static,
       required: false,
-      custom_options: item.custom_options,
     };
 
     if (item.type === 'custom') {
