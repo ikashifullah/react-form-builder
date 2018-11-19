@@ -763,7 +763,7 @@ class Tags extends React.Component {
     }
 
     if (this.props.read_only) {
-      props.disabled = 'disabled';
+      props.disabled = true;
     }
 
     let baseClasses = 'SortableItem rfb-item';
