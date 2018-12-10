@@ -613,7 +613,7 @@ class Dropdown extends React.Component {
               )}
           </label>
           <select {...props}>
-            {this.props.data.options.map(function(option) {
+            {this.props.data.options.map(function (option) {
               let this_key = 'preview_' + option.key;
               return (
                 <option value={option.value} key={this_key}>
@@ -710,14 +710,14 @@ class Signature extends React.Component {
               )}
           </label>
           {this.props.read_only === true &&
-          this.props.defaultValue &&
-          this.props.defaultValue.length > 0 ? (
-            <div>
-              <img src={sourceDataURL} />
-            </div>
-          ) : (
-            <SignaturePad {...pad_props} />
-          )}
+            this.props.defaultValue &&
+            this.props.defaultValue.length > 0 ? (
+              <div>
+                <img src={sourceDataURL} />
+              </div>
+            ) : (
+              <SignaturePad {...pad_props} />
+            )}
           <input {...props} />
         </div>
       </div>
@@ -741,6 +741,10 @@ class Tags extends React.Component {
   handleChange = e => {
     this.setState({ value: e });
   };
+
+  componentDidCatch(e) {
+    console.log(e)
+  }
 
   render() {
     let options = this.props.data.options.map(option => {
@@ -965,7 +969,7 @@ class RadioButtons extends React.Component {
             if (self.props.mutable) {
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
-                self.props.defaultValue.indexOf(option.value) > -1
+                  self.props.defaultValue.indexOf(option.value) > -1
                   ? true
                   : false;
             }
@@ -974,7 +978,7 @@ class RadioButtons extends React.Component {
               props.disabled = 'disabled';
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
-                self.props.defaultValue.indexOf(option.key) > -1
+                  self.props.defaultValue.indexOf(option.key) > -1
                   ? true
                   : false;
             }
@@ -1196,7 +1200,7 @@ class Camera extends React.Component {
       reader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onloadend = function() {
+      reader.onloadend = function () {
         self.setState({
           img: reader.result,
         });

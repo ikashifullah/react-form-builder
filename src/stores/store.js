@@ -1,4 +1,4 @@
-import Store from 'beedle';
+import Store from './beedle';
 import { get, post } from './requests';
 
 let _data = [];
