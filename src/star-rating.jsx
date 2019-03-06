@@ -254,18 +254,6 @@ export default class StarRating extends React.Component {
               style={{ width: this.state.pos }}
             />
           </div>
-          <input
-            type="number"
-            name={this.props.name}
-            value={this.state.ratingCache.rating}
-            style={{ display: 'none !important' }}
-            min={this.min}
-            max={this.max}
-            readOnly
-            style={{
-              width: 65,
-            }}
-          />
         </React.Fragment>
       );
     } else {
@@ -282,18 +270,6 @@ export default class StarRating extends React.Component {
               style={{ width: this.state.pos }}
             />
           </div>
-          <input
-            type="number"
-            name={this.props.name}
-            value={this.state.ratingCache.rating}
-            style={{ display: 'none !important' }}
-            min={this.min}
-            max={this.max}
-            readOnly
-            style={{
-              width: 65,
-            }}
-          />
         </React.Fragment>
       );
     }
@@ -306,6 +282,13 @@ export default class StarRating extends React.Component {
           className={classes}
         >
           {starRating}
+          <span
+            name={this.props.name}
+            value={this.state.ratingCache.rating}
+            style={{padding: "7px 0px 0 15px"}}
+          >
+            {this.state.ratingCache.rating}
+          </span>
         </span>
       </span>
     );
