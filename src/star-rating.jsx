@@ -111,7 +111,10 @@ export default class StarRating extends React.Component {
     }
     return (
       <div className="rating-stars">
-        <div className="star-container">{stars}</div>
+        <div className="star-container">
+        {stars}
+        <span className="rating-number">{rating}</span>
+        </div>
       </div>
     );
   }
