@@ -22,12 +22,18 @@ export default class StarRating extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: this.props.rating || 0,
+      rating: props.rating || 0,
       temp_rating: 0
     };
   }
 
   handleMouseover(rating) {
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
     this.setState(prev => ({
       rating,
       temp_rating: prev.rating
@@ -41,16 +47,25 @@ export default class StarRating extends React.Component {
   }
 
   rate(rating) {
+    const { onRatingClick, disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
     this.setState({
       rating,
       temp_rating: rating
     });
+
+    onRatingClick(rating);
   }
 
   render() {
+    const { ratingAmount, name } = this.props;
     const { rating } = this.state;
     let stars = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < ratingAmount; i++) {
       let starClass = "star-rated-outline";
       const isValidRating = rating >= i+0.5 && rating !== 0;
       if (isValidRating) {
@@ -65,7 +80,10 @@ export default class StarRating extends React.Component {
       }
 
       stars.push(
-        <span className="star" key={`star-${i+0.5}`}>
+        <span
+          className="star" key={`star-${i+0.5}`}
+          name={name}
+        >
           <span
             style={{
               ...starStyles,
