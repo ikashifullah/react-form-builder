@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
 /**
  * @fileoverview react-star-rating
  * @author @cameronjroe
+ * Referenced from https://codesandbox.io/s/oq6l8ppon9
  * <StarRating
  *   name={string} - name for form input (required)
  *   caption={string} - caption for rating (optional)
@@ -21,276 +21,80 @@ import cx from 'classnames';
 export default class StarRating extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      ratingCache: {
-        pos: 0,
-        rating: 0,
-      },
-      stars: 5,
-      rating: props.rating,
-      pos: 0,
-      glyph: this.getStars(),
+      rating: this.props.rating || 0,
+      temp_rating: 0
     };
   }
 
-  /**
-   * Gets the stars based on ratingAmount
-   * @return {string} stars
-   */
-  getStars() {
-    var stars = '';
-    var numRating = this.props.ratingAmount;
-    for (var i = 0; i < numRating; i++) {
-      stars += '\u2605';
-    }
-    return stars;
+  handleMouseover(rating) {
+    this.setState(prev => ({
+      rating,
+      temp_rating: prev.rating
+    }));
   }
 
-  componentWillMount() {
-    this.min = 0;
-    this.max = this.props.ratingAmount || 5;
-    if (this.props.rating) {
-      var ratingVal = this.props.rating;
-      this.state.ratingCache.pos = this.getStarRatingPosition(ratingVal);
-      this.state.ratingCache.rating = ratingVal;
-
-      this.setState({
-        ratingCache: this.state.ratingCache,
-        rating: ratingVal,
-        pos: this.getStarRatingPosition(ratingVal),
-      });
-    }
+  handleMouseout() {
+    this.setState(prev => ({
+      rating: prev.temp_rating
+    }));
   }
 
-  componentDidMount() {
-    this.root = ReactDOM.findDOMNode(this.rootNode);
-    this.ratingContainer = ReactDOM.findDOMNode(this.node);
-  }
-
-  componentWillUnmount() {
-    delete this.root;
-    delete this.ratingContainer;
-  }
-
-  getPosition(e) {
-    return e.pageX - this.root.getBoundingClientRect().left;
-  }
-
-  applyPrecision(val, precision) {
-    return parseFloat(val.toFixed(precision));
-  }
-
-  getDecimalPlaces(num) {
-    var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-    return !match
-      ? 0
-      : Math.max(
-          0,
-          (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0),
-        );
-  }
-
-  getWidthFromValue(val) {
-    var min = this.min,
-      max = this.max;
-    if (val <= min || min === max) {
-      return 0;
-    }
-    if (val >= max) {
-      return 100;
-    }
-    return (val / (max - min)) * 100;
-  }
-
-  getValueFromPosition(pos) {
-    var precision = this.getDecimalPlaces(this.props.step);
-    var maxWidth = this.ratingContainer.offsetWidth;
-    var diff = this.max - this.min;
-    var factor = (diff * pos) / (maxWidth * this.props.step);
-    factor = Math.ceil(factor);
-    var val = this.applyPrecision(
-      parseFloat(this.min + factor * this.props.step),
-      precision,
-    );
-    val = Math.max(Math.min(val, this.max), this.min);
-    return val;
-  }
-
-  calculate(pos) {
-    var val = this.getValueFromPosition(pos),
-      width = this.getWidthFromValue(val);
-
-    width += '%';
-    return { width, val };
-  }
-
-  getStarRatingPosition(val) {
-    var width = this.getWidthFromValue(val) + '%';
-    return width;
-  }
-
-  getRatingEvent(e) {
-    var pos = this.getPosition(e);
-    return this.calculate(pos);
-  }
-
-  getSvg() {
-    return (
-      <svg
-        className="react-star-rating__star"
-        viewBox="0 0 286 272"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <polygon
-            id="star-flat"
-            points="143 225 54.8322122 271.352549 71.6707613 173.176275 0.341522556 103.647451 98.9161061 89.3237254 143 0 187.083894 89.3237254 285.658477 103.647451 214.329239 173.176275 231.167788 271.352549 "
-          />
-        </g>
-      </svg>
-    );
-  }
-
-  handleMouseLeave() {
+  rate(rating) {
     this.setState({
-      pos: this.state.ratingCache.pos,
-      rating: this.state.ratingCache.rating,
+      rating,
+      temp_rating: rating
     });
-  }
-
-  handleMouseMove(e) {
-    // get hover position
-    var ratingEvent = this.getRatingEvent(e);
-    this.updateRating(ratingEvent.width, ratingEvent.val);
-  }
-
-  updateRating(width, val) {
-    this.setState({
-      pos: width,
-      rating: val,
-    });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps !== this.props) {
-      this.updateRating(
-        this.getStarRatingPosition(nextProps.rating),
-        nextProps.rating,
-      );
-      return true;
-    } else {
-      return (
-        nextState.ratingCache.rating !== this.state.ratingCache.rating ||
-        nextState.rating !== this.state.rating
-      );
-    }
-  }
-
-  handleClick(e) {
-    // is it disabled?
-    if (this.props.disabled) {
-      e.stopPropagation();
-      e.preventDefault();
-      return false;
-    }
-
-    var ratingCache = {
-      pos: this.state.pos,
-      rating: this.state.rating,
-      caption: this.props.caption,
-      name: this.props.name,
-    };
-
-    this.setState({
-      ratingCache: ratingCache,
-    });
-
-    this.props.onRatingClick(e, ratingCache);
-  }
-
-  treatName(title) {
-    if (typeof title === 'string') {
-      return title
-        .toLowerCase()
-        .split(' ')
-        .join('_');
-    }
   }
 
   render() {
-    var caption = null;
-    var classes = cx({
-      'react-star-rating__root': true,
-      'rating-disabled': this.props.disabled,
-      ['react-star-rating__size--' + this.props.size]: this.props.size,
-      'rating-editing': this.props.editing,
-    });
+    const { rating } = this.state;
+    let stars = [];
+    for (let i = 0; i < 5; i++) {
+      let starClass = "star-rated-outline";
+      const isValidRating = rating >= i+0.5 && rating !== 0;
+      if (isValidRating) {
+        starClass = "star-rated";
+      }
 
-    // is there a caption?
-    if (this.props.caption) {
-      caption = (
-        <span className="react-rating-caption">{this.props.caption}</span>
-      );
-    }
+      const starStyles = {
+        display: "inline-block",
+        width: "16px",
+        fontSize: "32px",
+        overflow: "hidden",
+      }
 
-    // are we editing this rating?
-    var starRating;
-    if (this.props.editing) {
-      starRating = (
-        <React.Fragment>
-          <div
-            ref={c => (this.node = c)}
-            className="rating-container rating-gly-star"
-            data-content={this.state.glyph}
-            onMouseMove={this.handleMouseMove.bind(this)}
-            onMouseLeave={this.handleMouseLeave.bind(this)}
-            onClick={this.handleClick.bind(this)}
-          >
-            <div
-              className="rating-stars"
-              data-content={this.state.glyph}
-              style={{ width: this.state.pos }}
-            />
-          </div>
-        </React.Fragment>
-      );
-    } else {
-      starRating = (
-        <React.Fragment>
-          <div
-            ref={c => (this.node = c)}
-            className="rating-container rating-gly-star"
-            data-content={this.state.glyph}
-          >
-            <div
-              className="rating-stars"
-              data-content={this.state.glyph}
-              style={{ width: this.state.pos }}
-            />
-          </div>
-        </React.Fragment>
-      );
-    }
-
-    return (
-      <span className="react-star-rating">
-        <span
-          ref={c => (this.rootNode = c)}
-          style={{ cursor: 'pointer' }}
-          className={classes}
-        >
-          {starRating}
+      stars.push(
+        <span className="star" key={`star-${i+0.5}`}>
           <span
-            name={this.props.name}
-            value={this.state.ratingCache.rating}
-            style={{padding: "7px 0px 0 15px"}}
-          >
-            {this.state.ratingCache.rating}
+            style={{
+              ...starStyles,
+              direction: "ltr"
+            }}
+            className={starClass}
+            onMouseOver={() => this.handleMouseover(i+0.5)}
+            onClick={() => this.rate(i+0.5)}
+            onMouseOut={() => this.handleMouseout()}
+          >{isValidRating ? <i>&#x2605;</i> : <i>&#x2606;</i>}
+          </span>
+          <span
+            style={{
+              ...starStyles,
+              direction: "rtl"
+            }}
+            className={starClass}
+            onMouseOver={() => this.handleMouseover(i+1)}
+            onClick={() => this.rate(i+1)}
+            onMouseOut={() => this.handleMouseout()}
+          >{rating >= i+1 && rating !== 0 ? <i>&#x2605;</i> : <i>&#x2606;</i>}
           </span>
         </span>
-      </span>
+      );
+    }
+    return (
+      <div className="rating-stars">
+        <div className="star-container">{stars}</div>
+      </div>
     );
   }
 }
