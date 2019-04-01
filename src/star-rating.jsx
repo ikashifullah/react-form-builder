@@ -8,12 +8,9 @@ import cx from 'classnames';
  * Referenced from https://codesandbox.io/s/oq6l8ppon9
  * <StarRating
  *   name={string} - name for form input (required)
- *   caption={string} - caption for rating (optional)
- *   ratingAmount={number} - the rating amount (required, default: 5)
  *   rating={number} - a set rating between the rating amount (optional)
  *   disabled={boolean} - whether to disable the rating from being selected (optional)
  *   editing={boolean} - whether the rating is explicitly in editing mode (optional)
- *   size={string} - size of stars (optional)
  *   onRatingClick={function} - a handler function that gets called onClick of the rating (optional)
  *   />
  */
@@ -62,10 +59,13 @@ export default class StarRating extends React.Component {
   }
 
   render() {
-    const { ratingAmount, name } = this.props;
+    const { name } = this.props;
     const { rating } = this.state;
+
+    // Restricted to 5 stars.
+    const RATING_AMOUNT = 5;
     let stars = [];
-    for (let i = 0; i < ratingAmount; i++) {
+    for (let i = 0; i < RATING_AMOUNT; i++) {
       let starClass = "star-rated-outline";
       const isValidRating = rating >= i+0.5 && rating !== 0;
       if (isValidRating) {
@@ -119,19 +119,14 @@ export default class StarRating extends React.Component {
 
 StarRating.propTypes = {
   name: PropTypes.string.isRequired,
-  caption: PropTypes.string,
-  ratingAmount: PropTypes.number.isRequired,
   rating: PropTypes.number,
   onRatingClick: PropTypes.func,
   disabled: PropTypes.bool,
   editing: PropTypes.bool,
-  size: PropTypes.string,
 };
 
 StarRating.defaultProps = {
-  step: 0.5,
   rating: 0,
-  ratingAmount: 5,
   onRatingClick() {},
   disabled: false,
 };
