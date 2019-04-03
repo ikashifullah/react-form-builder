@@ -38,6 +38,12 @@ export default class StarRating extends React.Component {
   }
 
   handleMouseout() {
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
     this.setState(prev => ({
       rating: prev.temp_rating
     }));
