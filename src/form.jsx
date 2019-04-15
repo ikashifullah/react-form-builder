@@ -7,13 +7,7 @@ import ReactDOM from 'react-dom';
 import { EventEmitter } from 'fbemitter';
 import FormValidator from './form-validator';
 import * as FormElements from './form-elements';
-import {
-  Camera,
-  Checkboxes,
-  Download,
-  Image,
-  Signature,
-} from './form-elements';
+import { Camera, Checkboxes, Download, Signature } from './form-elements';
 import CustomElement from './CustomElement';
 
 export default class ReactForm extends React.Component {
@@ -27,7 +21,7 @@ export default class ReactForm extends React.Component {
 
   _checkboxesDefaultValue(item) {
     let defaultChecked = [];
-    if (this.props.answer_data[item.field_name] != undefined) {
+    if (this.props.answer_data[item.field_name] !== undefined) {
       defaultChecked = this.props.answer_data[item.field_name];
     }
     return defaultChecked;
@@ -72,10 +66,13 @@ export default class ReactForm extends React.Component {
         } else {
           if (item.element === 'Tags') {
             $item = {};
-            $item.value = ref.inputField.current.state.value;
+            $item.value = ref.inputField.current.state.value || ref.state.value;
           } else if (item.element === 'DatePicker') {
             $item = {};
-            $item.value = ref.inputField.current.state.value;
+            $item.value =
+              ref.inputField.current.state.value ||
+              ref.inputField.current.input.value ||
+              ref.state.value;
           } else {
             $item = ReactDOM.findDOMNode(ref.inputField.current);
             $item.value = $item.value.trim();
@@ -100,7 +97,7 @@ export default class ReactForm extends React.Component {
           let $item = {};
           $item.value = ref.inputField.current.state.value;
           if ($item.value) {
-            if (Array.isArray($item.value) && $item.value.length == 0) {
+            if (Array.isArray($item.value) && $item.value.length === 0) {
               invalid = true;
             } else if (
               Object.keys([]).length === 0 &&
@@ -140,10 +137,13 @@ export default class ReactForm extends React.Component {
         } else {
           if (item.element === 'Tags') {
             $item = {};
-            $item.value = ref.inputField.current.state.value;
+            $item.value = ref.inputField.current.state.value || ref.state.value;
           } else if (item.element === 'DatePicker') {
             $item = {};
-            $item.value = ref.inputField.current.state.value;
+            $item.value =
+              ref.inputField.current.state.value ||
+              ref.inputField.current.input.value ||
+              ref.state.value;
           } else {
             $item = ReactDOM.findDOMNode(ref.inputField.current);
             $item.value = $item.value.trim();
@@ -310,6 +310,17 @@ export default class ReactForm extends React.Component {
     );
   }
 
+
+  componentWillUnmount() {
+    try {
+      if (this.customErrorSubscription) {
+        this.customErrorSubscription.remove();
+      }
+    } catch (e) {
+
+    }
+  }
+
   render() {
     let data_items = this.props.data;
 
@@ -401,9 +412,16 @@ export default class ReactForm extends React.Component {
     let actionName = this.props.action_name ? this.props.action_name : 'Submit';
     let backName = this.props.back_name ? this.props.back_name : 'Cancel';
 
+    if (this.props.onErrors && typeof this.props.onErrors === 'function') {
+      this.customErrorSubscription = this.emitter.addListener('formValidation', this.props.onErrors)
+    }
+
     return (
       <div>
-        <FormValidator emitter={this.emitter} />
+        {
+          !this.props.onErrors &&
+          <FormValidator emitter={this.emitter} />
+        }
         <div className="react-form-builder-form">
           <form
             encType="multipart/form-data"

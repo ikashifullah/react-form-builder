@@ -236,7 +236,7 @@ class TextInput extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -303,7 +303,7 @@ class NumberInput extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -369,7 +369,7 @@ class TextArea extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -489,7 +489,7 @@ class DatePicker extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -598,7 +598,7 @@ class Dropdown extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -613,7 +613,7 @@ class Dropdown extends React.Component {
               )}
           </label>
           <select {...props}>
-            {this.props.data.options.map(function(option) {
+            {this.props.data.options.map(function (option) {
               let this_key = 'preview_' + option.key;
               return (
                 <option value={option.value} key={this_key}>
@@ -695,7 +695,7 @@ class Signature extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -710,14 +710,14 @@ class Signature extends React.Component {
               )}
           </label>
           {this.props.read_only === true &&
-          this.props.defaultValue &&
-          this.props.defaultValue.length > 0 ? (
-            <div>
-              <img src={sourceDataURL} />
-            </div>
-          ) : (
-            <SignaturePad {...pad_props} />
-          )}
+            this.props.defaultValue &&
+            this.props.defaultValue.length > 0 ? (
+              <div>
+                <img src={sourceDataURL} />
+              </div>
+            ) : (
+              <SignaturePad {...pad_props} />
+            )}
           <input {...props} />
         </div>
       </div>
@@ -742,6 +742,10 @@ class Tags extends React.Component {
     this.setState({ value: e });
   };
 
+  componentDidCatch(e) {
+    console.log(e)
+  }
+
   render() {
     let options = this.props.data.options.map(option => {
       option.label = option.text;
@@ -763,7 +767,7 @@ class Tags extends React.Component {
     }
 
     if (this.props.read_only) {
-      props.disabled = 'disabled';
+      props.disabled = true;
     }
 
     let baseClasses = 'SortableItem rfb-item';
@@ -790,7 +794,7 @@ class Tags extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -965,7 +969,7 @@ class RadioButtons extends React.Component {
             if (self.props.mutable) {
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
-                self.props.defaultValue.indexOf(option.value) > -1
+                  self.props.defaultValue.indexOf(option.value) > -1
                   ? true
                   : false;
             }
@@ -974,7 +978,7 @@ class RadioButtons extends React.Component {
               props.disabled = 'disabled';
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
-                self.props.defaultValue.indexOf(option.key) > -1
+                  self.props.defaultValue.indexOf(option.key) > -1
                   ? true
                   : false;
             }
@@ -1086,7 +1090,7 @@ class Rating extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             <span
               dangerouslySetInnerHTML={{
                 __html: myxss.process(this.props.data.label),
@@ -1196,7 +1200,7 @@ class Camera extends React.Component {
       reader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onloadend = function() {
+      reader.onloadend = function () {
         self.setState({
           img: reader.result,
         });
@@ -1248,7 +1252,7 @@ class Camera extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             {this.props.data.label}
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
@@ -1384,7 +1388,7 @@ class Range extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <label>
+          <label className="form-label">
             {this.props.data.label}
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
