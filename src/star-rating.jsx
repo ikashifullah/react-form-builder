@@ -99,7 +99,7 @@ export default class StarRating extends React.Component {
             onMouseOver={() => this.handleMouseover(i+0.5)}
             onClick={() => this.rate(i+0.5)}
             onMouseOut={() => this.handleMouseout()}
-          >{isValidRating ? <i class="fa fa-star" aria-hidden="true"></i> : <i class="fa fa-star-o" aria-hidden="true"></i>}
+          >{isValidRating ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>}
           </span>
           <span
             style={{
@@ -110,7 +110,7 @@ export default class StarRating extends React.Component {
             onMouseOver={() => this.handleMouseover(i+1)}
             onClick={() => this.rate(i+1)}
             onMouseOut={() => this.handleMouseout()}
-          >{rating >= i+1 && rating !== 0 ? <i class="fa fa-star" aria-hidden="true"></i> : <i class="fa fa-star-o" aria-hidden="true"></i>}
+          >{rating >= i+1 && rating !== 0 ? <i className="fa fa-star" aria-hidden="true"></i> : <i className="fa fa-star-o" aria-hidden="true"></i>}
           </span>
         </span>
       );
